@@ -1,0 +1,38 @@
+[
+  {
+    "ContainingType": "Products.API.Controllers.ProductsController",
+    "Method": "Get",
+    "RelativePath": "api/Products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Products.API_.Models.Product, Products.API., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Products.API.Controllers.ProductsController",
+    "Method": "Post",
+    "RelativePath": "api/Products",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newProduct",
+        "Type": "Products.API_.Models.Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\controllers\\productscontrollers.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:controllers\\productscontrollers.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\models\\product.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:models\\product.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -33,38 +37,51 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductsControllers.cs.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Controllers\\ProductsControllers.cs.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProductsControllers.cs.cs",
-              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Controllers\\ProductsControllers.cs.cs",
-              "RelativeToolTip": "Controllers\\ProductsControllers.cs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:21:11.744Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Product.cs.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Models\\Product.cs.cs",
-              "RelativeDocumentMoniker": "Models\\Product.cs.cs",
-              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Models\\Product.cs.cs",
-              "RelativeToolTip": "Models\\Product.cs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T22:43:50.044Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T00:57:55.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T23:21:11.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Models\\Product.cs",
+              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Models\\Product.cs",
+              "RelativeToolTip": "Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T22:43:50.044Z",
+              "EditorCaption": ""
             }
           ]
         }
