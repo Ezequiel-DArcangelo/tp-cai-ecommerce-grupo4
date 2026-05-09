@@ -7,7 +7,7 @@ namespace Products.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // Esto es una lista temporal para probar que la API funciona
+        // Es una lista temporal
         private static List<Product> _products = new List<Product>();
 
         [HttpGet]
@@ -26,12 +26,12 @@ namespace Products.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] Product productUpdate) // Cambiado a Product
+        public IActionResult Put(Guid id, [FromBody] Product productUpdate) 
         {
             var existingProduct = _products.FirstOrDefault(p => p.Id == id);
             if (existingProduct == null) return NotFound();
 
-            // Se actualizan todos los campos del modelo que tenemos en Product.cs
+            // Se actualizan los campos del modelo que tenemos en Product.cs
             existingProduct.Nombre = productUpdate.Nombre;
             existingProduct.Descripcion = productUpdate.Descripcion; 
             existingProduct.Precio = productUpdate.Precio;
