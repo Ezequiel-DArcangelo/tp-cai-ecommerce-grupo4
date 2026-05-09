@@ -24,5 +24,33 @@ namespace Products.API.Controllers
             _products.Add(newProduct);
             return Ok(newProduct);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, [FromBody] Product productUpdate) // Cambiado a Product
+        {
+            var existingProduct = _products.FirstOrDefault(p => p.Id == id);
+            if (existingProduct == null) return NotFound();
+
+            // Se actualizan todos los campos del modelo que tenemos en Product.cs
+            existingProduct.Nombre = productUpdate.Nombre;
+            existingProduct.Descripcion = productUpdate.Descripcion; 
+            existingProduct.Precio = productUpdate.Precio;
+            existingProduct.Stock = productUpdate.Stock;
+            existingProduct.Categoria = productUpdate.Categoria; 
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var product = _products.FirstOrDefault(p => p.Id == id);
+            if (product == null) return NotFound();
+
+            _products.Remove(product);
+            return NoContent();
+        }
+
+
     }
 }
