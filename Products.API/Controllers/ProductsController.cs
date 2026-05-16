@@ -22,7 +22,16 @@ namespace Products.API.Controllers
             newProduct.Id = Guid.NewGuid();
             newProduct.FechaCreacion = DateTime.Now;
             _products.Add(newProduct);
-            return Ok(newProduct);
+            return CreatedAtAction(nameof(GetById), new { id = newProduct.Id }, newProduct);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var product = _products.FirstOrDefault(p => p.Id == id);
+            if (product == null) return NotFound();
+
+            return Ok(product);
         }
 
         [HttpPut("{id}")]
