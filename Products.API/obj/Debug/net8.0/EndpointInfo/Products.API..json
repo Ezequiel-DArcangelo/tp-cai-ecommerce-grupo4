@@ -160,6 +160,9 @@
   "components": {
     "schemas": {
       "Product": {
+        "required": [
+          "nombre"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -167,18 +170,22 @@
             "format": "uuid"
           },
           "nombre": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
           },
           "descripcion": {
             "type": "string",
             "nullable": true
           },
           "precio": {
+            "minimum": 0.01,
             "type": "number",
             "format": "double"
           },
           "stock": {
+            "maximum": 2147483647,
+            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },

@@ -19,6 +19,11 @@ namespace Products.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Product newProduct)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             newProduct.Id = Guid.NewGuid();
             newProduct.FechaCreacion = DateTime.Now;
             _products.Add(newProduct);
