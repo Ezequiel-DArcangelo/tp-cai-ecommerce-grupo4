@@ -18,6 +18,12 @@ namespace Products.API.Services
         
         }
 
+        // Método para buscar un producto específico por su ID
+        public Product GetById(Guid id)
+        {
+            return _products.FirstOrDefault(p => p.Id == id);
+        }
+
     }
 
 }
