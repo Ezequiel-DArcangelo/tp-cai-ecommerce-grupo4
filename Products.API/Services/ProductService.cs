@@ -13,7 +13,7 @@ namespace Products.API.Services
         public IEnumerable<Product> GetAll()
 
         {
-          return _products;
+            return _products;
         }
 
         // Método para buscar un producto específico por su ID
@@ -29,6 +29,24 @@ namespace Products.API.Services
             newProduct.FechaCreacion = DateTime.Now;
             _products.Add(newProduct);
         }
-    }
 
+        //Método para actualizar un producto existente 
+        public bool Update(Guid id, Product updatedProduct)
+        {
+            var existingProduct = _products.FirstOrDefault(p => p.Id == id);
+            if (existingProduct == null)
+            {
+                return false; //No se encontró el producto a actualizar
+            }
+
+            //Actualizamos los campos correspondientes 
+            existingProduct.Nombre = updatedProduct.Nombre;
+            existingProduct.Descripcion = updatedProduct.Descripcion;
+            existingProduct.Precio = updatedProduct.Precio;
+            existingProduct.Stock = updatedProduct.Stock;
+            existingProduct.Categoria = updatedProduct.Categoria;
+
+            return true; //Producto actualizado exitosamente
+        }
+    }
 }
