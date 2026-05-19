@@ -13,9 +13,7 @@ namespace Products.API.Services
         public IEnumerable<Product> GetAll()
 
         {
-          
           return _products;
-        
         }
 
         // Método para buscar un producto específico por su ID
@@ -24,6 +22,13 @@ namespace Products.API.Services
             return _products.FirstOrDefault(p => p.Id == id);
         }
 
+        //Método para agregar un nuevo producto a la lista de productos
+        public void Add(Product newProduct)
+        {
+            newProduct.Id = Guid.NewGuid();
+            newProduct.FechaCreacion = DateTime.Now;
+            _products.Add(newProduct);
+        }
     }
 
 }
