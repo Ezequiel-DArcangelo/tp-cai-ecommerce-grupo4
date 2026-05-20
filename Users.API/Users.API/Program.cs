@@ -1,4 +1,5 @@
 using Users.API.Services;
+using Users.API.ExceptionHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<UsersService>();
 
+// Registrar los handlers de excepciones (orden: del mas especifico al mas generico)
+builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
+builder.Services.AddExceptionHandler<BusinessRuleExceptionHandler>();
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+
 var app = builder.Build();
+
+// Activar el manejo global de excepciones (usa los handlers registrados arriba)
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
