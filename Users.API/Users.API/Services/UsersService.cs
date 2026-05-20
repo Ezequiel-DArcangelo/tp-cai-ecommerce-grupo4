@@ -12,6 +12,9 @@ namespace Users.API.Services
 
         public UserResponse Register(RegisterRequest request)
         {
+            // Validar campos (USR-002)
+            ValidarRegisterRequest(request);
+
             // Verificar que el email no este registrado (USR-001)
             foreach (User user in _users)
             {
@@ -81,6 +84,61 @@ namespace Users.API.Services
             response.FechaRegistro = user.FechaRegistro;
             response.Activo = user.Activo;
             return response;
+        }
+
+        // Valida los campos del request de registro.
+        // Si hay errores, los acumula y lanza una sola ValidationException (USR-002).
+        private void ValidarRegisterRequest(RegisterRequest request)
+        {
+            List<string> errores = new List<string>();
+
+            // Validar Nombre
+            if (string.IsNullOrWhiteSpace(request.Nombre))
+            {
+                errores.Add("El nombre es obligatorio.");
+            }
+
+            // Validar Apellido
+            if (string.IsNullOrWhiteSpace(request.Apellido))
+            {
+                errores.Add("El apellido es obligatorio.");
+            }
+
+            // Validar Email
+            if (string.IsNullOrWhiteSpace(request.Email))
+            {
+                errores.Add("El email es obligatorio.");
+            }
+            else if (!request.Email.Contains("@") || !request.Email.Contains("."))
+            {
+                errores.Add("El email no tiene un formato válido.");
+            }
+
+            // Validar Password
+            if (string.IsNullOrWhiteSpace(request.Password))
+            {
+                errores.Add("La password es obligatoria.");
+            }
+            else if (request.Password.Length < 8)
+            {
+                errores.Add("La password debe tener al menos 8 caracteres.");
+            }
+
+            // Si hay errores, lanzar una unica excepcion con todos juntos
+            if (errores.Count > 0)
+            {
+                string mensaje = "";
+                for (int i = 0; i < errores.Count; i++)
+                {
+                    mensaje = mensaje + errores[i];
+                    if (i < errores.Count - 1)
+                    {
+                        mensaje = mensaje + " ";
+                    }
+                }
+
+                throw new ValidationException("USR-002", mensaje);
+            }
         }
     }
 }

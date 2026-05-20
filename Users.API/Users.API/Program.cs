@@ -3,9 +3,14 @@ using Users.API.ExceptionHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Desactivar la validacion automatica de Data Annotations.
+// Las validaciones las maneja UsersService y devuelven ValidationException (USR-002).
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.SuppressModelStateInvalidFilter = true;
+    });
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
