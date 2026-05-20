@@ -1,5 +1,7 @@
 ﻿using Users.API.DTOs;
 using Users.API.Models;
+using Users.API.Exceptions;
+
 
 namespace Users.API.Services
 {
@@ -10,13 +12,24 @@ namespace Users.API.Services
 
         public UserResponse Register(RegisterRequest request)
         {
+            // Verificar que el email no este registrado (USR-001)
+            foreach (User user in _users)
+            {
+                if (user.Email == request.Email)
+                {
+                    throw new BusinessRuleException(
+                        "USR-001",
+                        "El email '" + request.Email + "' ya está registrado.");
+                }
+            }
+
             // Crear el nuevo usuario
             User newUser = new User();
             newUser.Id = Guid.NewGuid();
             newUser.Nombre = request.Nombre;
             newUser.Apellido = request.Apellido;
             newUser.Email = request.Email;
-            newUser.PasswordHash = request.Password; // TODO: hashear cuando se implemente
+            newUser.PasswordHash = request.Password; // TODO: hashear
             newUser.FechaRegistro = DateTime.UtcNow;
             newUser.Activo = true;
             newUser.IntentosFallidos = 0;
