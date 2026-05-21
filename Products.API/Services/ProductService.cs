@@ -48,5 +48,17 @@ namespace Products.API.Services
 
             return true; //Producto actualizado exitosamente
         }
+
+        //Método para eliminar un producto
+        public bool Delete(Guid id)
+        {
+            var product = _products.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+            {
+                return false; //Si no se encontró el producto a eliminar
+            }
+            _products.Remove(product);
+            return true; //Producto eliminado exitosamente
+        }
     }
 }
