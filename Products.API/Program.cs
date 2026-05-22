@@ -1,9 +1,11 @@
+using Products.API.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Agregamos servicios al contenedor
 builder.Services.AddControllers(); 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ProductService>(); // Registro del servicio de productos como Scoped
 
 var app = builder.Build();
 
