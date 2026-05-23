@@ -45,30 +45,50 @@ namespace Users.API.Services
         public UserResponse Login(LoginRequest request)
         {
             // Buscar el usuario por email
-            User userEncontrado = null;
-            foreach (User user in _users)
+            User usuarioEncontrado = BuscarUsuarioPorEmail(request.Email);
+
+            // Si no existe, devolvemos USR-003 (no USR-001 por seguridad: no revelamos si el email esta registrado)
+            if (usuarioEncontrado == null)
             {
-                if (user.Email == request.Email)
+                throw new BusinessRuleException("USR-003", "Credenciales incorrectas.");
+            }
+
+            // Si esta marcado como fraude, USR-005 (chequea primero porque es mas grave que USR-004)
+            if (usuarioEncontrado.MarcadoComoFraude == true)
+            {
+                throw new BusinessRuleException(
+                    "USR-005",
+                    "Su cuenta fue suspendida por razones de seguridad. Contacte a soporte.");
+            }
+
+            // Si esta bloqueado por intentos fallidos, USR-004
+            if (usuarioEncontrado.Activo == false && usuarioEncontrado.IntentosFallidos >= 3)
+            {
+                throw new BusinessRuleException(
+                    "USR-004",
+                    "Su cuenta fue bloqueada por superar el máximo de intentos fallidos. Contacte a soporte.");
+            }
+
+            // Verificar la password
+            if (usuarioEncontrado.PasswordHash != request.Password)
+            {
+                // Password incorrecta: sumar intento fallido
+                usuarioEncontrado.IntentosFallidos = usuarioEncontrado.IntentosFallidos + 1;
+
+                // Si llego a 3 intentos fallidos, marcar como bloqueado
+                if (usuarioEncontrado.IntentosFallidos >= 3)
                 {
-                    userEncontrado = user;
-                    break;
+                    usuarioEncontrado.Activo = false;
                 }
+
+                // Devolver USR-003 igual (al siguiente intento ya recibira USR-004 si quedo bloqueado)
+                throw new BusinessRuleException("USR-003", "Credenciales incorrectas.");
             }
 
-            // Si no existe el usuario
-            if (userEncontrado == null)
-            {
-                return null;
-            }
+            // Login exitoso: resetear intentos fallidos
+            usuarioEncontrado.IntentosFallidos = 0;
 
-            // Verificar la contraseña
-            if (userEncontrado.PasswordHash != request.Password)
-            {
-                return null;
-            }
-
-            // Devolver respuesta sin PasswordHash
-            return MapToResponse(userEncontrado);
+            return MapToResponse(usuarioEncontrado);
         }
 
         // Método auxiliar: convierte User en UserResponse
