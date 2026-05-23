@@ -26,10 +26,6 @@ namespace Users.API.Controllers
         public IActionResult Login([FromBody] LoginRequest request)
         {
             UserResponse response = _usersService.Login(request);
-
-            if (response == null)
-                return Unauthorized();
-
             return Ok(response);
         }
     }
