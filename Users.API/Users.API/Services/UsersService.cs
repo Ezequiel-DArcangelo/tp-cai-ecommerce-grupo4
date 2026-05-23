@@ -16,14 +16,12 @@ namespace Users.API.Services
             ValidarRegisterRequest(request);
 
             // Verificar que el email no este registrado (USR-001)
-            foreach (User user in _users)
+            User usuarioExistente = BuscarUsuarioPorEmail(request.Email);
+            if (usuarioExistente != null)
             {
-                if (user.Email == request.Email)
-                {
-                    throw new BusinessRuleException(
-                        "USR-001",
-                        "El email '" + request.Email + "' ya está registrado.");
-                }
+                throw new BusinessRuleException(
+                    "USR-001",
+                    "El email '" + request.Email + "' ya está registrado.");
             }
 
             // Crear el nuevo usuario
@@ -140,5 +138,20 @@ namespace Users.API.Services
                 throw new ValidationException("USR-002", mensaje);
             }
         }
+
+        // Busca un usuario por email en la lista. Devuelve null si no existe.
+        private User BuscarUsuarioPorEmail(string email)
+        {
+            foreach (User user in _users)
+            {
+                if (user.Email == email)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+
+
     }
 }
