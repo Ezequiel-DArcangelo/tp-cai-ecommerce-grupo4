@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Products.API.Services;
 using Products.API_.Models;
 
 namespace Products.API.Controllers
@@ -7,13 +8,17 @@ namespace Products.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // Es una lista temporal
-        private static List<Product> _products = new List<Product>();
+        private readonly ProductService _productService; // Declaración de la variable del servicio de productos
+
+        public ProductsController(ProductService productService) // El constructor recibe el servicio desde el contenedor de .NET
+        {
+            _productService = productService; 
+        }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public IActionResult Get()
         {
-            return _products;
+            return Ok(_productService.GetAll());
         }
 
         [HttpPost]
@@ -24,44 +29,45 @@ namespace Products.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            newProduct.Id = Guid.NewGuid();
-            newProduct.FechaCreacion = DateTime.Now;
-            _products.Add(newProduct);
+            _productService.Add(newProduct); // El servicio se encarga de asignarle ID, fecha y de guardarlo
             return CreatedAtAction(nameof(GetById), new { id = newProduct.Id }, newProduct);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
-            var product = _products.FirstOrDefault(p => p.Id == id);
+            var product = _productService.GetById(id);
             if (product == null) return NotFound();
 
             return Ok(product);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] Product productUpdate) 
+        public IActionResult Put(Guid id, [FromBody] Product updatedProduct) 
         {
-            var existingProduct = _products.FirstOrDefault(p => p.Id == id);
-            if (existingProduct == null) return NotFound();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            // Se actualizan los campos del modelo que tenemos en Product.cs
-            existingProduct.Nombre = productUpdate.Nombre;
-            existingProduct.Descripcion = productUpdate.Descripcion; 
-            existingProduct.Precio = productUpdate.Precio;
-            existingProduct.Stock = productUpdate.Stock;
-            existingProduct.Categoria = productUpdate.Categoria; 
+            var success = _productService.Update(id, updatedProduct);
+            if (!success)
+            {
+                return NotFound();
+            }
 
-            return NoContent();
+            return NoContent(); // Código 204: la actualización fue exitosa pero no devuelve contenido
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            var product = _products.FirstOrDefault(p => p.Id == id);
-            if (product == null) return NotFound();
+            var success = _productService.Delete(id);
+            if (!success)
+            {
+                return NotFound();
+            }
 
-            _products.Remove(product);
             return NoContent();
         }
 
