@@ -1,0 +1,9 @@
+﻿namespace Orders.API.DTOs
+{
+    public class CreateOrderRequest
+    {
+        public int UsuarioId { get; set; }
+        public List<OrderItemDTO> Items { get; set; }
+    }
+
+}
