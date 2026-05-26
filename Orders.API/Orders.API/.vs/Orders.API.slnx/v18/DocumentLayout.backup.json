@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\services\\ordersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:services\\ordersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -71,6 +75,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "Models\\Order.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Models\\Order.cs",
+              "RelativeToolTip": "Models\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T02:02:18.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "OrdersService.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Services\\OrdersService.cs",
               "RelativeDocumentMoniker": "Services\\OrdersService.cs",
@@ -83,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GenericExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\GenericExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\GenericExceptionHandler.cs",
@@ -95,7 +112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ValidationExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\ValidationExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\ValidationExceptionHandler.cs",
@@ -107,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "NotFoundExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\NotFoundExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\NotFoundExceptionHandler.cs",
@@ -119,7 +136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "BusinessRuleExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
@@ -131,7 +148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -139,12 +156,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:09:40.937Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T22:09:40.937Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "OrderItemDTO.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\OrderItemDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\OrderItemDTO.cs",
@@ -156,7 +172,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "UpdateOrderStatusRequest.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\UpdateOrderStatusRequest.cs",
               "RelativeDocumentMoniker": "DTOs\\UpdateOrderStatusRequest.cs",
@@ -168,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "OrderResponse.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\OrderResponse.cs",
               "RelativeDocumentMoniker": "DTOs\\OrderResponse.cs",
@@ -180,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "CreateOrderRequest.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\CreateOrderRequest.cs",
               "RelativeDocumentMoniker": "DTOs\\CreateOrderRequest.cs",
@@ -192,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "NotFoundException.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Exceptions\\NotFoundException.cs",
               "RelativeDocumentMoniker": "Exceptions\\NotFoundException.cs",
@@ -204,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "ValidationException.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Exceptions\\ValidationException.cs",
               "RelativeDocumentMoniker": "Exceptions\\ValidationException.cs",
@@ -216,7 +232,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "BusinessRuleException.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Exceptions\\BusinessRuleException.cs",
               "RelativeDocumentMoniker": "Exceptions\\BusinessRuleException.cs",
@@ -228,7 +244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "OrdersControllers.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Controllers\\OrdersControllers.cs",
               "RelativeDocumentMoniker": "Controllers\\OrdersControllers.cs",
