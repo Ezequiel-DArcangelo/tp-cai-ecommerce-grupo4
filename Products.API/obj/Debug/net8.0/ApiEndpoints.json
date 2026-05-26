@@ -7,17 +7,7 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Products.API_.Models.Product, Products.API., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Products.API.Controllers.ProductsController",
@@ -65,7 +55,7 @@
         "IsRequired": true
       },
       {
-        "Name": "productUpdate",
+        "Name": "updatedProduct",
         "Type": "Products.API_.Models.Product",
         "IsRequired": true
       }

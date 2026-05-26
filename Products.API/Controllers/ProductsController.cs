@@ -47,16 +47,18 @@ namespace Products.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState); // Código 400: la solicitud es incorrecta
             }
 
             var success = _productService.Update(id, updatedProduct);
             if (!success)
             {
-                return NotFound();
+                return NotFound(); // Código 404: el producto con el ID especificado no existe
             }
 
-            return NoContent(); // Código 204: la actualización fue exitosa pero no devuelve contenido
+            var product = _productService.GetById(id); // Obtiene el producto actualizado para devolverlo en la respuesta
+
+            return Ok(product); // Devuelve 200 OK con el producto actualizado en el cuerpo de la respuesta
         }
 
         [HttpDelete("{id}")]
