@@ -10,12 +10,18 @@ namespace Orders.API.Services
         private static List<Order> _orders = new List<Order>();
         private static int _nextId = 1;
 
-        // Obtener todas las órdenes
-        public List<OrderResponse> GetOrders()
+        // Obtener todas las órdenes (con filtro opcional por usuarioId)
+        public List<OrderResponse> GetOrders(int? usuarioId = null)
         {
-            return _orders.Select(o => MapToResponse(o)).ToList();
-        }
+            var query = _orders.AsQueryable();
 
+            if (usuarioId.HasValue)
+            {
+                query = query.Where(o => o.UsuarioId == usuarioId.Value);
+            }
+
+            return query.Select(o => MapToResponse(o)).ToList();
+        }
         // Obtener una orden por ID
         public OrderResponse GetOrderById(int id)
         {

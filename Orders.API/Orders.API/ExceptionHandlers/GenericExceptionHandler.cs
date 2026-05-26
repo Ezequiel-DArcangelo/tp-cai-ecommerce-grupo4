@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using Orders.API.Exceptions;
 
 namespace Orders.API.ExceptionHandlers
 {

@@ -6,9 +6,9 @@ namespace Orders.API.Models
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }
-        public List<OrderItemDTO> Items { get; set; }
+        public List<OrderItemDTO> Items { get; set; } = new List<OrderItemDTO>();
         public decimal Total { get; set; }
-        public string Estado { get; set; }
+        public string Estado { get; set; } = "Pendiente";
         public DateTime FechaCreacion { get; set; }
     }
 }

@@ -1,6 +1,10 @@
-﻿namespace Orders.API.Exceptions
+﻿public class ValidationException : Exception
 {
-    public class ValidationException
+    public string ErrorCode { get; }
+
+    public ValidationException(string errorCode, string message)
+        : base(message)
     {
+        ErrorCode = errorCode;
     }
 }

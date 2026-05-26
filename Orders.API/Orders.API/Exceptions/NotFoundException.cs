@@ -1,6 +1,10 @@
-﻿namespace Orders.API.Exceptions
+﻿public class NotFoundException : Exception
 {
-    public class NotFoundException
+    public string ErrorCode { get; }
+
+    public NotFoundException(string errorCode, string message)
+        : base(message)
     {
+        ErrorCode = errorCode;
     }
 }
