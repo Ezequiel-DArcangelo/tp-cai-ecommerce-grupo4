@@ -1,4 +1,5 @@
-﻿using Products.API_.Models;
+﻿using Products.API_.Exceptions;
+using Products.API_.Models;
 
 namespace Products.API.Services
 
@@ -19,7 +20,14 @@ namespace Products.API.Services
         // Método para buscar un producto específico por su ID
         public Product GetById(Guid id)
         {
-            return _products.FirstOrDefault(p => p.Id == id);
+            var product = _products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                throw new NotFoundException("PRD-001", $"Producto con ID {id} no existe.");
+            }
+
+            return product;
         }
 
         //Método para agregar un nuevo producto a la lista de productos
