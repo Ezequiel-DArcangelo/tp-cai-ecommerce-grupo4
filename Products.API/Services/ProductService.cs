@@ -11,10 +11,21 @@ namespace Products.API.Services
         private static readonly List<Product> _products = new List<Product>();
 
         // Método para obtener todos los productos
-        public IEnumerable<Product> GetAll()
-
+        public IEnumerable<Product> GetAll(string? categoria, string? nombre)
         {
-            return _products;
+            var resultado = _products.AsEnumerable();
+
+            if (!string.IsNullOrEmpty(categoria))
+            {
+                resultado = resultado.Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                resultado = resultado.Where(p => p.Nombre.Contains(nombre, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return resultado.ToList();
         }
 
         // Método para buscar un producto específico por su ID

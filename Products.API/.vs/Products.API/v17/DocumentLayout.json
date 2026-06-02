@@ -66,8 +66,7 @@
               "RelativeToolTip": "Exceptions\\BusinessRuleException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T20:59:07.621Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T20:59:07.621Z"
             },
             {
               "$type": "Document",
@@ -77,7 +76,7 @@
               "RelativeDocumentMoniker": "Services\\ProductService.cs",
               "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Services\\ProductService.cs",
               "RelativeToolTip": "Services\\ProductService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwBwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAUwA0AAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-18T03:59:23.828Z",
               "EditorCaption": ""
@@ -92,8 +91,7 @@
               "RelativeToolTip": "ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T22:03:00.885Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T22:03:00.885Z"
             },
             {
               "$type": "Document",
@@ -105,8 +103,7 @@
               "RelativeToolTip": "Exceptions\\NotFoundException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T20:49:39.403Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T20:49:39.403Z"
             },
             {
               "$type": "Document",
@@ -116,7 +113,7 @@
               "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
               "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Controllers\\ProductsController.cs",
               "RelativeToolTip": "Controllers\\ProductsController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwD8AAABjAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-07T23:21:11.744Z",
               "EditorCaption": ""
@@ -131,8 +128,7 @@
               "RelativeToolTip": "ExceptionHandlers\\NotFoundExceptionHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T01:51:21.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T01:51:21.606Z"
             },
             {
               "$type": "Document",

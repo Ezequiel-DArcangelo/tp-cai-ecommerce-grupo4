@@ -16,9 +16,10 @@ namespace Products.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll([FromQuery] string? categoria, [FromQuery] string? nombre)
         {
-            return Ok(_productService.GetAll());
+            var products = _productService.GetAll(categoria, nombre); // El servicio se encarga de filtrar los productos según los parámetros de consulta
+            return Ok(products);
         }
 
         [HttpPost]
