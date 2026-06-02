@@ -4,7 +4,25 @@ using Products.API.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Agregamos servicios al contenedor
-builder.Services.AddControllers(); 
+builder.Services.AddControllers().ConfigureApiBehaviorOptions (options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var problemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
+        {
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            Title = "Bad Request",
+            Status = StatusCodes.Status400BadRequest,
+            Detail = "Los datos proporcionados no son válidos o tienen un formato incorrecto.",
+        };
+
+        problemDetails.Extensions["errorCode"] = "PRD-002";
+        problemDetails.Extensions["errorMessage"] = "Los datos del producto no son válidos.";
+
+        return new Microsoft.AspNetCore.Mvc.BadRequestObjectResult(problemDetails);
+    };
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ProductService>(); // Registro del servicio de productos como Scoped

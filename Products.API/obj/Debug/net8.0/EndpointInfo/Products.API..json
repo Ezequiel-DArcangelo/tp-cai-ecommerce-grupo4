@@ -10,6 +10,22 @@
         "tags": [
           "Products"
         ],
+        "parameters": [
+          {
+            "name": "categoria",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nombre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -135,7 +151,10 @@
     "schemas": {
       "Product": {
         "required": [
-          "nombre"
+          "categoria",
+          "nombre",
+          "precio",
+          "stock"
         ],
         "type": "object",
         "properties": {
@@ -149,10 +168,13 @@
             "type": "string"
           },
           "descripcion": {
+            "maxLength": 500,
+            "minLength": 0,
             "type": "string",
             "nullable": true
           },
           "precio": {
+            "maximum": 999999999,
             "minimum": 0.01,
             "type": "number",
             "format": "double"
@@ -164,8 +186,8 @@
             "format": "int32"
           },
           "categoria": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "fechaCreacion": {
             "type": "string",
