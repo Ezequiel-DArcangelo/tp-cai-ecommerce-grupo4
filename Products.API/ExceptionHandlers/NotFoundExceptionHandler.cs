@@ -16,7 +16,7 @@ namespace Products.API.ExceptionHandlers
                 type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
                 title = "Not Found",
                 status = 404,
-                detail = "El recurso solicitado no fue encontrado.",
+                detail = "El producto solicitado no fue encontrado.",
                 instance = context.Request.Path.Value,
                 errorCode = ex.ErrorCode,
                 errorMessage = ex.Message

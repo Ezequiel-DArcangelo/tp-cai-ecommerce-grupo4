@@ -33,18 +33,25 @@ namespace Products.API.Services
         //Método para agregar un nuevo producto a la lista de productos
         public void Add(Product newProduct)
         {
+            // Validamos si existe el nombre en la lista 
+            var yaExiste = _products.Any(p => p.Nombre.ToUpper() == newProduct.Nombre.ToUpper());
+            if (yaExiste)
+            {
+                throw new BusinessRuleException("PRD-003", $"Ya existe un producto registrado con el nombre '{newProduct.Nombre}'.");
+            }
+
             newProduct.Id = Guid.NewGuid();
             newProduct.FechaCreacion = DateTime.Now;
             _products.Add(newProduct);
         }
 
         //Método para actualizar un producto existente 
-        public bool Update(Guid id, Product updatedProduct)
+        public void Update(Guid id, Product updatedProduct)
         {
             var existingProduct = _products.FirstOrDefault(p => p.Id == id);
             if (existingProduct == null)
             {
-                return false; //No se encontró el producto a actualizar
+                throw new NotFoundException("PRD-001", $"Producto con ID {id} no se encontró."); //Si no se encontró el producto a actualizar
             }
 
             //Actualizamos los campos correspondientes 
@@ -54,19 +61,18 @@ namespace Products.API.Services
             existingProduct.Stock = updatedProduct.Stock;
             existingProduct.Categoria = updatedProduct.Categoria;
 
-            return true; //Producto actualizado exitosamente
         }
 
         //Método para eliminar un producto
-        public bool Delete(Guid id)
+        public void Delete(Guid id)
         {
             var product = _products.FirstOrDefault(p => p.Id == id);
             if (product == null)
             {
-                return false; //Si no se encontró el producto a eliminar
+                //Si no se encontró el producto a eliminar, detiene la ejecución con un 404
+                throw new NotFoundException("PRD-001", $"Producto con ID {id} no se encontró."); 
             }
             _products.Remove(product);
-            return true; //Producto eliminado exitosamente
         }
     }
 }

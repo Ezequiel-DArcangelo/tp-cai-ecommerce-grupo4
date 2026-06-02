@@ -15,7 +15,7 @@ namespace Products.API.ExceptionHandlers
                 type = "https://tools.ietf.org/html/rfc7231#section-6.5.9",
                 title = "Conflict",
                 status = 409,
-                detail = "Ya existe un recurso con esos datos o no se puede modificar.",
+                detail = "Ya existe un producto con esos datos o no se puede modificar.",
                 instance = context.Request.Path.Value,
                 errorCode = ex.ErrorCode,
                 errorMessage = ex.Message

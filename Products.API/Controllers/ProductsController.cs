@@ -36,8 +36,7 @@ namespace Products.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
-            var product = _productService.GetById(id);
-            if (product == null) return NotFound();
+            var product = _productService.GetById(id);// El servicio se encarga de buscar el producto por ID y lanzar una excepción si no lo encuentra
 
             return Ok(product);
         }
@@ -50,11 +49,7 @@ namespace Products.API.Controllers
                 return BadRequest(ModelState); // Código 400: la solicitud es incorrecta
             }
 
-            var success = _productService.Update(id, updatedProduct);
-            if (!success)
-            {
-                return NotFound(); // Código 404: el producto con el ID especificado no existe
-            }
+            _productService.Update(id, updatedProduct);// El servicio se encarga de actualizar el producto y lanza una excepción si no lo encuentra
 
             var product = _productService.GetById(id); // Obtiene el producto actualizado para devolverlo en la respuesta
 
@@ -64,13 +59,9 @@ namespace Products.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            var success = _productService.Delete(id);
-            if (!success)
-            {
-                return NotFound();
-            }
+            _productService.Delete(id);// El servicio se encarga de eliminar el producto y lanza una excepción si no lo encuentra
 
-            return NoContent();
+            return NoContent(); // Devuelve 204 No Content indicando que la eliminación fue exitosa
         }
 
 
