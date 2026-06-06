@@ -10,6 +10,13 @@ namespace Products.API.Services
         // Movimos la lista temporal de productos hacia acá 
         private static readonly List<Product> _products = new List<Product>();
 
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public ProductService(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
         // Método para obtener todos los productos
         public IEnumerable<Product> GetAll(string? categoria, string? nombre)
         {
@@ -75,15 +82,30 @@ namespace Products.API.Services
         }
 
         //Método para eliminar un producto
-        public void Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             var product = _products.FirstOrDefault(p => p.Id == id);
             if (product == null)
             {
                 //Si no se encontró el producto a eliminar, detiene la ejecución con un 404
-                throw new NotFoundException("PRD-001", $"Producto con ID {id} no se encontró."); 
+                throw new NotFoundException("PRD-001", $"Producto con ID {id} no se encontró.");
             }
-            _products.Remove(product);
+
+            var client = _httpClientFactory.CreateClient();
+
+            var respuesta = await client.GetFromJsonAsync<ResultadoOrden>($"https://localhost:7200/api/orders/check-product/{id}");
+
+            if (respuesta != null && respuesta.TieneOrdenesActivas == true)
+            {
+                //Si el producto tiene órdenes asociadas, detiene la ejecución con un 400
+                throw new BusinessRuleException("PRD-004", "El producto tiene órdenes activas y no puede eliminarse.");
+
+                _products.Remove(product);
+            }
         }
+            public class ResultadoOrden
+            {
+                public bool TieneOrdenesActivas { get; set; }
+            }
     }
 }

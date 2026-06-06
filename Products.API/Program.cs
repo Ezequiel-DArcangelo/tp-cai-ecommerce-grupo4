@@ -26,6 +26,8 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions (options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ProductService>(); // Registro del servicio de productos como Scoped
+builder.Services.AddHttpClient(); // Para habilitar las llamadas HTTP desde el servicio de productos
+
 // Manejadores de excepciones 
 builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
 builder.Services.AddExceptionHandler<BusinessRuleExceptionHandler>();

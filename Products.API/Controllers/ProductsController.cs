@@ -58,9 +58,9 @@ namespace Products.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            _productService.Delete(id);// El servicio se encarga de eliminar el producto y lanza una excepción si no lo encuentra
+            await _productService.DeleteAsync(id);// El servicio se encarga de eliminar el producto y lanza una excepción si no lo encuentra
 
             return NoContent(); // Devuelve 204 No Content indicando que la eliminación fue exitosa
         }
