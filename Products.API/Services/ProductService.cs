@@ -1,5 +1,6 @@
 ﻿using Products.API_.Exceptions;
 using Products.API_.Models;
+using Products.API_.DTOs;
 
 namespace Products.API.Services
 
@@ -49,18 +50,27 @@ namespace Products.API.Services
         }
 
         //Método para agregar un nuevo producto a la lista de productos
-        public void Add(Product newProduct)
+        public void Add(ProductCreateDto newProductDto)
         {
             // Validamos si existe el nombre en la lista 
-            var yaExiste = _products.Any(p => p.Nombre.ToUpper() == newProduct.Nombre.ToUpper());
+            bool yaExiste = _products.Any(p => p.Nombre.ToUpper() == newProductDto.Nombre.ToUpper() && p.Categoria.ToUpper() == newProductDto.Categoria.ToUpper());
             if (yaExiste)
             {
-                throw new BusinessRuleException("PRD-003", $"Ya existe un producto registrado con el nombre '{newProduct.Nombre}'.");
+                throw new BusinessRuleException("PRD-003", $"Ya existe un producto registrado con el nombre '{newProductDto.Nombre}'.");
             }
 
-            newProduct.Id = Guid.NewGuid();
-            newProduct.FechaCreacion = DateTime.Now;
-            _products.Add(newProduct);
+            var product = new Product
+            {
+                Id = Guid.NewGuid(),
+                Nombre = newProductDto.Nombre,
+                Descripcion = newProductDto.Descripcion,
+                Precio = newProductDto.Precio,
+                Stock = newProductDto.Stock,
+                Categoria = newProductDto.Categoria,
+                FechaCreacion = DateTime.Now
+            };
+
+            _products.Add(product);
         }
 
         //Método para actualizar un producto existente 

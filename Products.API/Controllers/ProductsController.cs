@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Products.API.Services;
 using Products.API_.Models;
+using Products.API_.DTOs;
 
 namespace Products.API.Controllers
 {
@@ -23,15 +24,15 @@ namespace Products.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Product newProduct)
+        public IActionResult Post([FromBody] ProductCreateDto newProductDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _productService.Add(newProduct); // El servicio se encarga de asignarle ID, fecha y de guardarlo
-            return CreatedAtAction(nameof(GetById), new { id = newProduct.Id }, newProduct);
+            _productService.Add(newProductDto); 
+            return StatusCode (201); // Devuelve 201 Created indicando que el producto fue creado exitosamente
         }
 
         [HttpGet("{id}")]
