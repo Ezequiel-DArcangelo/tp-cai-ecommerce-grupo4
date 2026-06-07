@@ -29,8 +29,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "newProduct",
-        "Type": "Products.API_.Models.Product",
+        "Name": "newProductDto",
+        "Type": "Products.API_.DTOs.ProductCreateDto",
         "IsRequired": true
       }
     ],
@@ -66,8 +66,8 @@
         "IsRequired": true
       },
       {
-        "Name": "updatedProduct",
-        "Type": "Products.API_.Models.Product",
+        "Name": "updatedProductDto",
+        "Type": "Products.API_.DTOs.ProductUpdateDto",
         "IsRequired": true
       }
     ],

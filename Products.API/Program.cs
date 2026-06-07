@@ -1,7 +1,12 @@
 using Products.API.ExceptionHandlers;
 using Products.API.Services;
+using Serilog;
+using Products.API;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configuración del logging con Serilog
+builder.AddAppLogging();
 
 // Agregamos servicios al contenedor
 builder.Services.AddControllers().ConfigureApiBehaviorOptions (options =>
@@ -17,7 +22,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions (options =>
         };
 
         problemDetails.Extensions["errorCode"] = "PRD-002";
-        problemDetails.Extensions["errorMessage"] = "Los datos del producto no son válidos.";
+        problemDetails.Extensions["errorMessage"] = "Los datos del producto son inválidos.";
 
         return new Microsoft.AspNetCore.Mvc.BadRequestObjectResult(problemDetails);
     };
@@ -35,6 +40,14 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging(options =>
+{
+    options.GetLevel = (httpContext, _, ex) =>
+    (ex != null) ? Serilog.Events.LogEventLevel.Error :
+    (httpContext.Request.Path.StartsWithSegments("/health")
+    ? Serilog.Events.LogEventLevel.Verbose : Serilog.Events.LogEventLevel.Information);
+});
 
 // Configura el pipeline HTTP
 if (app.Environment.IsDevelopment())
