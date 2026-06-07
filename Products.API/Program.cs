@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using Products.API.ExceptionHandlers;
 using Products.API.Services;
 using Serilog;
@@ -31,6 +32,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions (options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ProductService>(); // Registro del servicio de productos como Scoped
+builder.Services.AddSingleton<DatabaseInitializer>(); // Registro del inicializador de la base de datos
 builder.Services.AddHttpClient(); // Para habilitar las llamadas HTTP desde el servicio de productos
 
 // Manejadores de excepciones 
@@ -40,6 +42,12 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var initializer = scope.ServiceProvider.GetRequiredService<DatabaseInitializer>();
+    initializer.Initialize();
+}
 
 app.UseSerilogRequestLogging(options =>
 {

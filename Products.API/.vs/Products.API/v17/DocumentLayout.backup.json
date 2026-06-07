@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\loggingextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:loggingextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\databaseinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:databaseinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\loggingextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|solutionrelative:loggingextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5AA561BF-EBDF-4601-AC46-3DC2FEDB55F9}|Products.API..csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\products.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,19 +46,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DatabaseInitializer.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\DatabaseInitializer.cs",
+              "RelativeDocumentMoniker": "DatabaseInitializer.cs",
+              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\DatabaseInitializer.cs",
+              "RelativeToolTip": "DatabaseInitializer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T17:38:42.031Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -60,14 +69,27 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABSAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAAMAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-07T06:33:36.187Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-07T17:28:42.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "LoggingExtensions.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\LoggingExtensions.cs",
               "RelativeDocumentMoniker": "LoggingExtensions.cs",
@@ -80,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "ProductUpdateDto.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\DTOs\\ProductUpdateDto.cs",
               "RelativeDocumentMoniker": "DTOs\\ProductUpdateDto.cs",
@@ -92,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "ProductsController.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
@@ -100,12 +122,11 @@
               "RelativeToolTip": "Controllers\\ProductsController.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAA9wCsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-06T23:13:23.106Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-06T23:13:23.106Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ProductCreateDto.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\DTOs\\ProductCreateDto.cs",
               "RelativeDocumentMoniker": "DTOs\\ProductCreateDto.cs",
@@ -117,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ProductService.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Services\\ProductService.cs",
               "RelativeDocumentMoniker": "Services\\ProductService.cs",
@@ -129,7 +150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Models\\Product.cs",
               "RelativeDocumentMoniker": "Models\\Product.cs",
