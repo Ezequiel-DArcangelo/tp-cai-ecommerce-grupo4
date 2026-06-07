@@ -74,7 +74,7 @@ namespace Products.API.Services
         }
 
         //Método para actualizar un producto existente 
-        public void Update(Guid id, Product updatedProduct)
+        public void Update(Guid id, ProductUpdateDto updatedProductDto)
         {
             var existingProduct = _products.FirstOrDefault(p => p.Id == id);
             if (existingProduct == null)
@@ -83,11 +83,11 @@ namespace Products.API.Services
             }
 
             //Actualizamos los campos correspondientes 
-            existingProduct.Nombre = updatedProduct.Nombre;
-            existingProduct.Descripcion = updatedProduct.Descripcion;
-            existingProduct.Precio = updatedProduct.Precio;
-            existingProduct.Stock = updatedProduct.Stock;
-            existingProduct.Categoria = updatedProduct.Categoria;
+            existingProduct.Nombre = updatedProductDto.Nombre;
+            existingProduct.Descripcion = updatedProductDto.Descripcion;
+            existingProduct.Precio = updatedProductDto.Precio;
+            existingProduct.Stock = updatedProductDto.Stock;
+            existingProduct.Categoria = updatedProductDto.Categoria;
 
         }
 

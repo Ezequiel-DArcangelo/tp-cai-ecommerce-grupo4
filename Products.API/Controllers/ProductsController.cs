@@ -44,14 +44,14 @@ namespace Products.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] Product updatedProduct) 
+        public IActionResult Put(Guid id, [FromBody] ProductUpdateDto updatedProductDto) 
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState); // Código 400: la solicitud es incorrecta
             }
 
-            _productService.Update(id, updatedProduct);// El servicio se encarga de actualizar el producto y lanza una excepción si no lo encuentra
+            _productService.Update(id, updatedProductDto);// El servicio se encarga de actualizar el producto y lanza una excepción si no lo encuentra
 
             var product = _productService.GetById(id); // Obtiene el producto actualizado para devolverlo en la respuesta
 
