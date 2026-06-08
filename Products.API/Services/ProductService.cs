@@ -7,115 +7,99 @@ namespace Products.API.Services
 {
     public class ProductService
 
-    {
-        // Movimos la lista temporal de productos hacia acá 
-        private static readonly List<Product> _products = new List<Product>();
-
+    { 
+        private readonly ProductRepository _repository;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public ProductService(IHttpClientFactory httpClientFactory)
+        // Constructor que recibe el repositorio y el HttpClientFactory a través de inyección de dependencias
+        public ProductService(ProductRepository repository, IHttpClientFactory httpClientFactory)
         {
+            _repository = repository;
             _httpClientFactory = httpClientFactory;
         }
 
-        // Método para obtener todos los productos
-        public IEnumerable<Product> GetAll(string? categoria, string? nombre)
+        // Método para obtener todos los productos de la base de datos
+        public async Task<IEnumerable<Product>> GetAllAsync(string? categoria = null, string? nombre = null) 
         {
-            var resultado = _products.AsEnumerable();
-
+            var productos = await _repository.GetAllAsync(); // Obtengo todos los productos del repositorio
             if (!string.IsNullOrEmpty(categoria))
             {
-                resultado = resultado.Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase));
+                // Si se especifica una categoría, filtro los productos por esa categoría
+                productos = productos.Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase)); 
             }
 
             if (!string.IsNullOrEmpty(nombre))
             {
-                resultado = resultado.Where(p => p.Nombre.Contains(nombre, StringComparison.OrdinalIgnoreCase));
+                // Si se especifica un nombre, filtro los productos por ese nombre (ignorando mayúsculas/minúsculas)
+                productos = productos.Where(p => p.Nombre.Contains(nombre, StringComparison.OrdinalIgnoreCase));
             }
 
-            return resultado.ToList();
+            return productos; // Devuelvo la lista de productos filtrada (o sin filtrar si no se especificaron criterios)
         }
 
         // Método para buscar un producto específico por su ID
-        public Product GetById(Guid id)
+        public async Task<Product> GetByIdAsync(string id)
         {
-            var product = _products.FirstOrDefault(p => p.Id == id);
+            var productos = await _repository.GetAllAsync();
+            var producto = productos.FirstOrDefault(p => p.Id == id);
 
-            if (product == null)
+            if (producto == null)
             {
                 throw new NotFoundException("PRD-001", $"Producto con ID {id} no existe.");
             }
 
-            return product;
+            return producto;
         }
 
-        //Método para agregar un nuevo producto a la lista de productos
-        public void Add(ProductCreateDto newProductDto)
+        public async Task<Product> CreateAsync(Product product) // Método para crear un nuevo producto en la base de datos
         {
-            // Validamos si existe el nombre en la lista 
-            bool yaExiste = _products.Any(p => p.Nombre.ToUpper() == newProductDto.Nombre.ToUpper() && p.Categoria.ToUpper() == newProductDto.Categoria.ToUpper());
-            if (yaExiste)
+            var existingProducts = await _repository.GetAllAsync(); // Obtengo todos los productos para validar que no este repetido
+          
+            if (existingProducts.Any(p => p.Nombre.Trim().ToLower() == product.Nombre.Trim().ToLower()))
             {
-                throw new BusinessRuleException("PRD-003", $"Ya existe un producto registrado con el nombre '{newProductDto.Nombre}'.");
+                // Si ya existe un producto con el mismo nombre y categoría, lanzo una excepción de regla de negocio
+                throw new BusinessRuleException("PRD-003",
+                $"Ya existe un producto registrado con el nombre '{product.Nombre}' en la categoría '{product.Categoria}'.");
             }
 
-            var product = new Product
-            {
-                Id = Guid.NewGuid(),
-                Nombre = newProductDto.Nombre,
-                Descripcion = newProductDto.Descripcion,
-                Precio = newProductDto.Precio,
-                Stock = newProductDto.Stock,
-                Categoria = newProductDto.Categoria,
-                FechaCreacion = DateTime.Now
-            };
+            // Se generan los datos automáticos antes de guardar el producto en la base de datos
+            product.Id = Guid.NewGuid().ToString(); 
+            product.CreatedAt = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"); 
 
-            _products.Add(product);
+            await _repository.CreateAsync(product); // Le pido al repositorio que guarde el nuevo producto en la base de datos
+            return product; 
         }
+
 
         //Método para actualizar un producto existente 
-        public void Update(Guid id, ProductUpdateDto updatedProductDto)
+        public async Task UpdateAsync(string id, Product product)
         {
-            var existingProduct = _products.FirstOrDefault(p => p.Id == id);
-            if (existingProduct == null)
-            {
-                throw new NotFoundException("PRD-001", $"Producto con ID {id} no se encontró."); //Si no se encontró el producto a actualizar
-            }
+            var existingProduct = await GetByIdAsync(id); // Primero busco el producto por su ID para validar que exista
+           
+            product.Id = id; // Aseguro que el ID del producto a actualizar sea el mismo que el ID del producto existente
+            product.CreatedAt = existingProduct.CreatedAt; // Mantengo la fecha de creación original del producto
 
-            //Actualizamos los campos correspondientes 
-            existingProduct.Nombre = updatedProductDto.Nombre;
-            existingProduct.Descripcion = updatedProductDto.Descripcion;
-            existingProduct.Precio = updatedProductDto.Precio;
-            existingProduct.Stock = updatedProductDto.Stock;
-            existingProduct.Categoria = updatedProductDto.Categoria;
-
+            await _repository.UpdateAsync(product); // Le pido al repositorio que actualice el producto en la base de datos
         }
 
         //Método para eliminar un producto
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(string id)
         {
-            var product = _products.FirstOrDefault(p => p.Id == id);
-            if (product == null)
-            {
-                //Si no se encontró el producto a eliminar, detiene la ejecución con un 404
-                throw new NotFoundException("PRD-001", $"Producto con ID {id} no se encontró.");
-            }
+            var product = await GetByIdAsync(id);
 
             var client = _httpClientFactory.CreateClient();
-
             var respuesta = await client.GetFromJsonAsync<ResultadoOrden>($"https://localhost:7200/api/orders/check-product/{id}");
 
-            if (respuesta != null && respuesta.TieneOrdenesActivas == true)
+            if (respuesta != null && respuesta.TieneOrdenesActivas)
             {
                 //Si el producto tiene órdenes asociadas, detiene la ejecución con un 400
                 throw new BusinessRuleException("PRD-004", "El producto tiene órdenes activas y no puede eliminarse.");
+            }
 
-                _products.Remove(product);
-            }
         }
-            public class ResultadoOrden
-            {
-                public bool TieneOrdenesActivas { get; set; }
-            }
+        public class ResultadoOrden
+        {
+          public bool TieneOrdenesActivas { get; set; }
+        }
     }
 }

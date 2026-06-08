@@ -16,52 +16,80 @@ namespace Products.API.Controllers
             _productService = productService; 
         }
 
-        [HttpGet]
-        public IActionResult GetAll([FromQuery] string? categoria, [FromQuery] string? nombre)
+        [HttpGet] // 1. GET api/products (nos trae todos los productos, con opción de filtrar por categoría o nombre)
+        public async Task<IActionResult> GetAll([FromQuery] string? categoria = null, [FromQuery] string? nombre = null)
         {
-            var products = _productService.GetAll(categoria, nombre); // El servicio se encarga de filtrar los productos según los parámetros de consulta
+            // Usamos await para esperar la respuesta de la base de datos, y pasamos los parámetros de categoría y nombre
+            // para filtrar los productos si se especifican
+            var products = await _productService.GetAllAsync(categoria, nombre); 
             return Ok(products);
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] ProductCreateDto newProductDto)
+        [HttpGet("{id}")] // 2. GET api/products/{id} (obtiene un producto específico por su ID)
+        public async Task <IActionResult> GetById(string id)
+        {
+            // El servicio se encarga de buscar el producto por su ID y lanza una excepción si no lo encuentra,
+            // pero si lo encuentra devuelve el producto
+            var product = await _productService.GetByIdAsync(id);
+
+            return Ok(product);
+        }
+
+        [HttpPost] // 3. POST api/products (crea un nuevo producto, validando los datos de entrada)
+        public async Task<IActionResult> Post([FromBody] ProductCreateDto newProductDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _productService.Add(newProductDto); 
-            return StatusCode (201); // Devuelve 201 Created indicando que el producto fue creado exitosamente
+            // Mapeamos los datos que vienen del cliente (DTO) a nuestra entidad de producto que se guardará en la base de datos
+            var product = new Product
+            {
+                Nombre = newProductDto.Nombre,
+                Descripcion = newProductDto.Descripcion,
+                Precio = newProductDto.Precio,
+                Stock = newProductDto.Stock,
+                Categoria = newProductDto.Categoria
+            };
+
+            // Guardamos el nuevo producto usando el servicio, que se encarga de asignar un ID y la fecha de creación,
+            // y luego lo devolvemos en la respuesta con un código 201 Created
+            var creado = await _productService.CreateAsync(product); 
+            return StatusCode (201, creado);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
-        {
-            var product = _productService.GetById(id);// El servicio se encarga de buscar el producto por ID y lanzar una excepción si no lo encuentra
 
-            return Ok(product);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] ProductUpdateDto updatedProductDto) 
+        [HttpPut("{id}")] // 4. PUT api/products/{id} (actualiza un producto existente, validando los datos de
+                          // entrada y manejando el caso de producto no encontrado)
+        public async Task <IActionResult> Put(string id, [FromBody] ProductUpdateDto updateProductDto) 
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState); // Código 400: la solicitud es incorrecta
             }
 
-            _productService.Update(id, updatedProductDto);// El servicio se encarga de actualizar el producto y lanza una excepción si no lo encuentra
+            var product = new Product
+            {
+                Nombre = updateProductDto.Nombre,
+                Descripcion = updateProductDto.Descripcion,
+                Precio = updateProductDto.Precio,
+                Stock = updateProductDto.Stock,
+                Categoria = updateProductDto.Categoria
+            };
 
-            var product = _productService.GetById(id); // Obtiene el producto actualizado para devolverlo en la respuesta
+            // El servicio se encarga de actualizar el producto y lanza una excepción si no lo encuentra
+            await _productService.UpdateAsync(id, product); 
 
-            return Ok(product); // Devuelve 200 OK con el producto actualizado en el cuerpo de la respuesta
+            return NoContent(); // Código 204: la actualización fue exitosa pero no se devuelve contenido en la respuesta
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete("{id}")]// 5. DELETE api/products/{id} (elimina un producto por su ID, manejando el caso de
+                            // producto no encontrado)
+        public async Task<IActionResult> Delete(string id)
         {
-            await _productService.DeleteAsync(id);// El servicio se encarga de eliminar el producto y lanza una excepción si no lo encuentra
+            // El servicio se encarga de eliminar el producto y lanza una excepción si no lo encuentra
+            await _productService.DeleteAsync(id);
 
             return NoContent(); // Devuelve 204 No Content indicando que la eliminación fue exitosa
         }

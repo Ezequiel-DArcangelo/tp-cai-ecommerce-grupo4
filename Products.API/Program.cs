@@ -33,6 +33,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ProductService>(); // Registro del servicio de productos como Scoped
 builder.Services.AddSingleton<DatabaseInitializer>(); // Registro del inicializador de la base de datos
+builder.Services.AddScoped<ProductRepository>(); // Registro del repositorio de productos como Scoped
 builder.Services.AddHttpClient(); // Para habilitar las llamadas HTTP desde el servicio de productos
 
 // Manejadores de excepciones 
