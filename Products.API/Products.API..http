@@ -1,6 +1,205 @@
-@Products.API__HostAddress = http://localhost:5147
+### Crear Producto 1 - Indumentaria
+POST https://localhost:7196/api/products
+Content-Type: application/json
 
-GET {{Products.API__HostAddress}}/weatherforecast/
-Accept: application/json
+{
+  "Nombre": "Zapatillas Deportivas Running",
+  "Descripcion": "Calzado cómodo para entrenamiento intenso.",
+  "Precio": 45000.00,
+  "Stock": 30,
+  "Categoria": "Indumentaria"
+}
 
 ###
+
+### Crear Producto 2 - Electrónica
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Auriculares Bluetooth In-Ear Pro",
+  "Descripcion": "Cancelación de ruido activa y alta fidelidad.",
+  "Precio": 15500.00,
+  "Stock": 25,
+  "Categoria": "Electrónica"
+}
+
+###
+
+### Crear Producto 3 - Herramientas
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Kit de Herramientas Manuales x15",
+  "Descripcion": "Maletín rígido con destornilladores y pinzas.",
+  "Precio": 8900.00,
+  "Stock": 15,
+  "Categoria": "Herramientas"
+}
+
+### Crear Producto 4 - Deportes
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Pelota de Fútbol Profesional N5",
+  "Descripcion": "Costuras reforzadas, ideal para césped natural o sintético.",
+  "Precio": 28900.00,
+  "Stock": 40,
+  "Categoria": "Deportes"
+}
+
+###
+
+### Crear Producto 5 - Deportes
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Gorra Deportiva Ajustable",
+  "Descripcion": "Tela respirable con protección UV para entrenamiento al aire libre.",
+  "Precio": 8500.00,
+  "Stock": 75,
+  "Categoria": "Deportes"
+}
+
+###
+
+### Crear Producto 6 - Hogar y Deco
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Lámpara de Escritorio LED",
+  "Descripcion": "Brazo flexible con tres niveles de intensidad de luz táctil.",
+  "Precio": 14200.00,
+  "Stock": 20,
+  "Categoria": "Hogar y Deco"
+}
+
+###
+
+### Crear Producto 7 - Hogar y Deco
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Set de Vasos de Vidrio x6",
+  "Descripcion": "Vasos de vidrio templado de alta resistencia, 400ml.",
+  "Precio": 9600.00,
+  "Stock": 50,
+  "Categoria": "Hogar y Deco"
+}
+
+###
+
+### Crear Producto 8 - Libros y Medios
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Libro Introducción a la Arquitectura de Software",
+  "Descripcion": "Conceptos clave sobre microservices, patrones y diseño limpio.",
+  "Precio": 18000.00,
+  "Stock": 15,
+  "Categoria": "Libros y Medios"
+}
+
+###
+
+### Crear Producto 9 - Libros y Medios
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Novela de Ficción Clásica",
+  "Descripcion": "Edición especial de tapa dura con ilustraciones exclusivas.",
+  "Precio": 12500.00,
+  "Stock": 30,
+  "Categoria": "Libros y Medios"
+}
+
+###
+
+### Crear Producto 10 - Juguetes
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Juego de Mesa de Estrategia",
+  "Descripcion": "Para 2 a 4 jugadores, incluye tablero, cartas y fichas de madera.",
+  "Precio": 24000.00,
+  "Stock": 12,
+  "Categoria": "Juguetes"
+}
+
+###
+
+### Crear Producto 11 - Juguetes
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Bloques de Construcción x100 piezas",
+  "Descripcion": "Balde de ladrillos plásticos encastrables de varios colores.",
+  "Precio": 11300.00,
+  "Stock": 35,
+  "Categoria": "Juguetes"
+}
+
+###
+
+### Crear Producto 12 - Salud y Belleza
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Crema Hidratante Facial",
+  "Descripcion": "Fórmula ligera con ácido hialurónico para todo tipo de piel.",
+  "Precio": 7900.00,
+  "Stock": 60,
+  "Categoria": "Salud y Belleza"
+}
+
+###
+
+### Crear Producto 13 - Salud y Belleza
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Tensiómetro Digital Automático",
+  "Descripcion": "Monitor de presión arterial de brazo con memoria para dos usuarios.",
+  "Precio": 38500.00,
+  "Stock": 8,
+  "Categoria": "Salud y Belleza"
+}
+
+###
+
+### Crear Producto 14 - Electrónica
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Teclado Mecánico RGB",
+  "Descripcion": "Switches red, ideal para desarrollo y gaming silencioso, conexión USB.",
+  "Precio": 32000.00,
+  "Stock": 18,
+  "Categoria": "Electrónica"
+}
+
+###
+
+### Crear Producto 15 - Herramientas
+POST https://localhost:7196/api/products
+Content-Type: application/json
+
+{
+  "Nombre": "Cinta Métrica Profesional 5m",
+  "Descripcion": "Carcasa de alta resistencia con freno automático y clip metálico.",
+  "Precio": 4200.00,
+  "Stock": 100,
+  "Categoria": "Herramientas"
+}
