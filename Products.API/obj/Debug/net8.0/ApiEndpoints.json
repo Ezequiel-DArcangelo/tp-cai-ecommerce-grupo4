@@ -46,7 +46,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Guid",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -62,11 +62,11 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Guid",
+        "Type": "System.String",
         "IsRequired": true
       },
       {
-        "Name": "updatedProductDto",
+        "Name": "updateProductDto",
         "Type": "Products.API_.DTOs.ProductUpdateDto",
         "IsRequired": true
       }
@@ -83,7 +83,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Guid",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

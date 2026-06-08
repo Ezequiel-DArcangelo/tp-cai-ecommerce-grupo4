@@ -1,1 +1,7 @@
 2026-06-07 04:05:29 | POST | /api/Products | 201 | CorrelationId: 
+2026-06-07 23:28:28 | GET | /ui/resources/vendors-dll.js | 200 | CorrelationId: 
+2026-06-07 23:28:29 | GET | /favicon.ico | 404 | CorrelationId: 
+2026-06-07 23:28:29 | GET | /ui/resources/1ae4e3706fe3f478fcc1.woff2 | 404 | CorrelationId: 
+2026-06-07 23:37:03 | GET | /ui/resources/vendors-dll.js | 200 | CorrelationId: 
+2026-06-07 23:37:03 | GET | /ui/resources/1ae4e3706fe3f478fcc1.woff2 | 404 | CorrelationId: 
+2026-06-07 23:37:04 | GET | /favicon.ico | 404 | CorrelationId: 

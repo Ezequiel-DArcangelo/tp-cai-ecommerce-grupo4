@@ -34,6 +34,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ProductService>(); // Registro del servicio de productos como Scoped
 builder.Services.AddSingleton<DatabaseInitializer>(); // Registro del inicializador de la base de datos
 builder.Services.AddScoped<ProductRepository>(); // Registro del repositorio de productos como Scoped
+builder.Services.AddHealthChecks().AddCheck<Products.API.Services.SqliteHealthCheck>("SQLite_Check"); // Registro del health check para SQLite
+builder.Services.AddHealthChecksUI().AddInMemoryStorage(); // Registro del Health Checks UI con almacenamiento en memoria
 builder.Services.AddHttpClient(); // Para habilitar las llamadas HTTP desde el servicio de productos
 
 // Manejadores de excepciones 
@@ -70,6 +72,16 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.UseExceptionHandler();
+
+app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    ResponseWriter = HealthChecks.UI.Client.UIResponseWriter.WriteHealthCheckUIResponse
+});
+app.MapHealthChecksUI(options =>
+{
+    options.UIPath = "/health-ui"; // Ruta para acceder a la UI de los health checks
+});
+
 
 app.MapControllers(); // Busca los controladores y los usa
 
