@@ -88,5 +88,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Products.API.Controllers.ProductsController",
+    "Method": "GetProductStock",
+    "RelativePath": "api/Products/{id}/stock",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

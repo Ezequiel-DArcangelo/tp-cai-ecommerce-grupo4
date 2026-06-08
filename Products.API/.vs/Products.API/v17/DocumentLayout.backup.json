@@ -70,8 +70,7 @@
               "RelativeToolTip": "Products.API..http",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwMwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2026-06-08T16:53:50.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-08T16:53:50.471Z"
             },
             {
               "$type": "Document",
@@ -105,7 +104,7 @@
               "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
               "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Products.API\\Controllers\\ProductsController.cs",
               "RelativeToolTip": "Controllers\\ProductsController.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAcwFYAAABZAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAswG4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-07T23:21:31.572Z",
               "EditorCaption": ""
@@ -120,8 +119,7 @@
               "RelativeToolTip": "Services\\ProductRepository.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAswDIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:53:36.963Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:53:36.963Z"
             },
             {
               "$type": "Document",
@@ -133,8 +131,7 @@
               "RelativeToolTip": "Services\\ProductService.cs",
               "ViewState": "AgIAAEcAAAAAAAAAAAAIwGAAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-06T22:20:58.932Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-06T22:20:58.932Z"
             },
             {
               "$type": "Document",
