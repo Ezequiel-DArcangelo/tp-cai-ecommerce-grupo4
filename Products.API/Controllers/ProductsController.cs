@@ -84,8 +84,7 @@ namespace Products.API.Controllers
             return NoContent(); // Código 204: la actualización fue exitosa pero no se devuelve contenido en la respuesta
         }
 
-        [HttpDelete("{id}")]// 5. DELETE api/products/{id} (elimina un producto por su ID, manejando el caso de
-                            // producto no encontrado)
+        [HttpDelete("{id}")]// 5. DELETE api/products/{id} (elimina un producto por su ID)
         public async Task<IActionResult> Delete(string id)
         {
             // El servicio se encarga de eliminar el producto y lanza una excepción si no lo encuentra

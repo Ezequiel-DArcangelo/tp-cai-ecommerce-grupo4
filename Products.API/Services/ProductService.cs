@@ -96,6 +96,7 @@ namespace Products.API.Services
                 throw new BusinessRuleException("PRD-004", "El producto tiene órdenes activas y no puede eliminarse.");
             }
 
+            await _repository.DeleteAsync(id);
         }
         public class ResultadoOrden
         {

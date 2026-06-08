@@ -42,5 +42,12 @@ namespace Products.API.Services
             Price = @Precio, Stock = @Stock, Category = @Categoria WHERE Id = @Id", product);
         }
 
+        public async Task DeleteAsync(string id)
+        {
+            using var conn = CreateConnection();
+
+            // Ejecutamos el comando SQL para borrar el registro físico de la tabla
+            await conn.ExecuteAsync("DELETE FROM Products WHERE Id = @Id", new { Id = id });
+        }
     }
 }   
