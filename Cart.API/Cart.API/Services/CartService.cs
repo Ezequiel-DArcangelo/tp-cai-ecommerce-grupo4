@@ -43,7 +43,7 @@ namespace Cart.API.Services
         }
 
         // PUT /api/cart/{userId}/items/{productId}
-        public async Task<CartResponse> UpdateItemAsync(Guid userId, Guid productId, UpdateItemRequest request)
+        public async Task<CartResponse> UpdateItemAsync(Guid userId, string productId, UpdateItemRequest request)
         {
             ValidarCantidad(request.Cantidad);
             ValidarProductoId(productId);
@@ -64,7 +64,7 @@ namespace Cart.API.Services
         }
 
         // DELETE /api/cart/{userId}/items/{productId}
-        public async Task RemoveItemAsync(Guid userId, Guid productId)
+        public async Task RemoveItemAsync(Guid userId, string productId)
         {
             var cart = await _repository.GetCartAsync(userId);
             if (cart == null)
@@ -98,7 +98,7 @@ namespace Cart.API.Services
                 UsuarioId = userId,
                 Items = items.Select(i => new CartItemDTO
                 {
-                    ProductoId = Guid.Parse(i.ProductoId),
+                    ProductoId = i.ProductoId,
                     Cantidad = i.Cantidad
                 }).ToList(),
                 FechaActualizacion = DateTime.UtcNow
@@ -111,9 +111,9 @@ namespace Cart.API.Services
                 throw new ValidationException("CRT-004", "La cantidad debe ser mayor a cero.");
         }
 
-        private void ValidarProductoId(Guid productoId)
+        private void ValidarProductoId(string productoId)
         {
-            if (productoId == Guid.Empty)
+            if (productoId == string.Empty)
                 throw new NotFoundException("CRT-002", $"El producto con ID {productoId} no existe.");
         }
     }

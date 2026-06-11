@@ -2,7 +2,7 @@
 {
     public class AddItemRequest
     {
-        public Guid ProductoId { get; set; }
+        public string ProductoId { get; set; } = string.Empty;
         public int Cantidad { get; set; }
     }
 }

@@ -13,7 +13,6 @@ namespace Cart.API.Data
         private SqliteConnection CreateConnection() =>
             new(_config.GetConnectionString("DefaultConnection") ?? "Data Source=cart.db");
 
-        // ── GET CART ──────────────────────────────────────────────────────────
         public async Task<CartEntity?> GetCartAsync(Guid usuarioId)
         {
             using var conn = CreateConnection();
@@ -25,7 +24,6 @@ namespace Cart.API.Data
             """, new { UsuarioId = usuarioId.ToString() });
         }
 
-        // ── GET ITEMS ─────────────────────────────────────────────────────────
         public async Task<IEnumerable<CartItemEntity>> GetItemsAsync(Guid usuarioId)
         {
             using var conn = CreateConnection();
@@ -38,7 +36,6 @@ namespace Cart.API.Data
             """, new { UsuarioId = usuarioId.ToString() });
         }
 
-        // ── CREATE CART ───────────────────────────────────────────────────────
         public async Task CreateCartAsync(Guid usuarioId)
         {
             using var conn = CreateConnection();
@@ -48,28 +45,26 @@ namespace Cart.API.Data
             """, new { UsuarioId = usuarioId.ToString() });
         }
 
-        // ── ADD OR UPDATE ITEM ────────────────────────────────────────────────
-        public async Task AddOrUpdateItemAsync(Guid usuarioId, Guid productoId, int cantidad)
+        public async Task AddOrUpdateItemAsync(Guid usuarioId, string productoId, int cantidad)
         {
             using var conn = CreateConnection();
             await conn.ExecuteAsync("""
                 INSERT INTO cart_items (usuario_id, producto_id, cantidad)
                 VALUES (@UsuarioId, @ProductoId, @Cantidad)
                 ON CONFLICT(usuario_id, producto_id)
-                DO UPDATE SET cantidad  = cantidad + @Cantidad,
+                DO UPDATE SET cantidad   = cantidad + @Cantidad,
                               updated_at = datetime('now');
             """, new
             {
                 UsuarioId = usuarioId.ToString(),
-                ProductoId = productoId.ToString(),
+                ProductoId = productoId,
                 Cantidad = cantidad
             });
 
             await UpdateCartTimestampAsync(usuarioId, conn);
         }
 
-        // ── UPDATE ITEM QUANTITY ──────────────────────────────────────────────
-        public async Task<bool> UpdateItemAsync(Guid usuarioId, Guid productoId, int cantidad)
+        public async Task<bool> UpdateItemAsync(Guid usuarioId, string productoId, int cantidad)
         {
             using var conn = CreateConnection();
             var rows = await conn.ExecuteAsync("""
@@ -81,7 +76,7 @@ namespace Cart.API.Data
             """, new
             {
                 UsuarioId = usuarioId.ToString(),
-                ProductoId = productoId.ToString(),
+                ProductoId = productoId,
                 Cantidad = cantidad
             });
 
@@ -89,8 +84,7 @@ namespace Cart.API.Data
             return rows > 0;
         }
 
-        // ── DELETE ITEM ───────────────────────────────────────────────────────
-        public async Task<bool> DeleteItemAsync(Guid usuarioId, Guid productoId)
+        public async Task<bool> DeleteItemAsync(Guid usuarioId, string productoId)
         {
             using var conn = CreateConnection();
             var rows = await conn.ExecuteAsync("""
@@ -100,14 +94,13 @@ namespace Cart.API.Data
             """, new
             {
                 UsuarioId = usuarioId.ToString(),
-                ProductoId = productoId.ToString()
+                ProductoId = productoId
             });
 
             if (rows > 0) await UpdateCartTimestampAsync(usuarioId, conn);
             return rows > 0;
         }
 
-        // ── CLEAR CART ────────────────────────────────────────────────────────
         public async Task<bool> ClearCartAsync(Guid usuarioId)
         {
             using var conn = CreateConnection();
@@ -120,7 +113,6 @@ namespace Cart.API.Data
             return rows > 0;
         }
 
-        // ── AUXILIAR ──────────────────────────────────────────────────────────
         private async Task UpdateCartTimestampAsync(Guid usuarioId, SqliteConnection conn)
         {
             await conn.ExecuteAsync("""
