@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{75AC2245-1121-4EBE-8121-C45C4A329937}|Notifications.API.csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\notifications.api\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75AC2245-1121-4EBE-8121-C45C4A329937}|Notifications.API.csproj|solutionrelative:controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{75AC2245-1121-4EBE-8121-C45C4A329937}|Notifications.API.csproj|c:\\users\\admin\\onedrive\\documentos\\tp - ecommerce\\tp-cai-ecommerce-grupo4\\notifications.api\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{75AC2245-1121-4EBE-8121-C45C4A329937}|Notifications.API.csproj|solutionrelative:services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -75,12 +79,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "NotificationsController.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Controllers\\NotificationsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NotificationsController.cs",
+              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Controllers\\NotificationsController.cs",
+              "RelativeToolTip": "Controllers\\NotificationsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T00:27:39.167Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "NotificationService.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Services\\NotificationService.cs",
               "RelativeDocumentMoniker": "Services\\NotificationService.cs",
               "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Services\\NotificationService.cs",
               "RelativeToolTip": "Services\\NotificationService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwC0AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAmwEgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-10T22:48:53.806Z",
               "EditorCaption": ""
@@ -88,18 +105,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "NotFoundException.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Exceptions\\NotFoundException.cs",
-              "RelativeDocumentMoniker": "Exceptions\\NotFoundException.cs",
-              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Exceptions\\NotFoundException.cs",
-              "RelativeToolTip": "Exceptions\\NotFoundException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T12:10:25.051Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "BusinessRuleException.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Exceptions\\BusinessRuleException.cs",
               "RelativeDocumentMoniker": "Exceptions\\BusinessRuleException.cs",
@@ -111,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CreateNotificationRequest.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\DTOs\\CreateNotificationRequest.cs",
               "RelativeDocumentMoniker": "DTOs\\CreateNotificationRequest.cs",
@@ -119,11 +124,12 @@
               "RelativeToolTip": "DTOs\\CreateNotificationRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAB9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T04:50:39.831Z"
+              "WhenOpened": "2026-06-10T04:50:39.831Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "NotificationResponse.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\DTOs\\NotificationResponse.cs",
               "RelativeDocumentMoniker": "DTOs\\NotificationResponse.cs",
@@ -135,7 +141,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Notification.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Models\\Notification.cs",
               "RelativeDocumentMoniker": "Models\\Notification.cs",
@@ -147,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -161,6 +167,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "NotFoundException.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Exceptions\\NotFoundException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\NotFoundException.cs",
+              "ToolTip": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Exceptions\\NotFoundException.cs",
+              "RelativeToolTip": "Exceptions\\NotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T12:10:25.051Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "NotFoundExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\ExceptionHandlers\\NotFoundExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\NotFoundExceptionHandler.cs",
@@ -172,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "BusinessRuleExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
@@ -184,7 +202,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "GlobalExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\ExceptionHandlers\\GlobalExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\GlobalExceptionHandler.cs",
@@ -196,7 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\admin\\OneDrive\\Documentos\\TP - ecommerce\\tp-cai-ecommerce-grupo4\\Notifications.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
