@@ -1,6 +1,8 @@
 using Users.API.Services;
 using Users.API.ExceptionHandlers;
 using Users.API.Data;
+using Users.API.Repositories;
+using Dapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,7 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<UsersRepository>();
 builder.Services.AddSingleton<UsersService>();
 
 // Registrar los handlers de excepciones (orden: del mas especifico al mas generico)
@@ -26,6 +29,9 @@ builder.Services.AddProblemDetails();
 
 
 var app = builder.Build();
+
+// Registrar el TypeHandler para convertir entre Guid (C#) y string (SQLite)
+SqlMapper.AddTypeHandler(new GuidTypeHandler());
 
 // Inicializar la base de datos (crea el archivo .db y la tabla Users si no existen)
 string connectionString = builder.Configuration.GetConnectionString("UsersDb");

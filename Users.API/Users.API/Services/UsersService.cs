@@ -1,15 +1,19 @@
 ﻿using Users.API.DTOs;
 using Users.API.Models;
 using Users.API.Exceptions;
+using Users.API.Repositories;
 using BCrypt.Net;
-
 
 namespace Users.API.Services
 {
     public class UsersService
     {
-        // Lista en memoria que simula la base de datos
-        private static List<User> _users = new List<User>();
+        private readonly UsersRepository _repository;
+
+        public UsersService(UsersRepository repository)
+        {
+            _repository = repository;
+        }
 
         public UserResponse Register(RegisterRequest request)
         {
@@ -17,7 +21,7 @@ namespace Users.API.Services
             ValidarRegisterRequest(request);
 
             // Verificar que el email no este registrado (USR-001)
-            User usuarioExistente = BuscarUsuarioPorEmail(request.Email);
+            User usuarioExistente = _repository.ObtenerPorEmail(request.Email);
             if (usuarioExistente != null)
             {
                 throw new BusinessRuleException(
@@ -31,23 +35,22 @@ namespace Users.API.Services
             newUser.Nombre = request.Nombre;
             newUser.Apellido = request.Apellido;
             newUser.Email = request.Email;
-            // Hashear la password antes de guardarla. BCrypt genera el salt automaticamente.
             newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
             newUser.FechaRegistro = DateTime.UtcNow;
             newUser.Activo = true;
             newUser.IntentosFallidos = 0;
+            newUser.MarcadoComoFraude = false;
 
-            // Agregarlo a la lista
-            _users.Add(newUser);
+            // Persistir el usuario en la base
+            _repository.Crear(newUser);
 
-            // Devolver la respuesta sin el PasswordHash
             return MapToResponse(newUser);
         }
 
         public UserResponse Login(LoginRequest request)
         {
             // Buscar el usuario por email
-            User usuarioEncontrado = BuscarUsuarioPorEmail(request.Email);
+            User usuarioEncontrado = _repository.ObtenerPorEmail(request.Email);
 
             // Si no existe, devolvemos USR-003 (no USR-001 por seguridad: no revelamos si el email esta registrado)
             if (usuarioEncontrado == null)
@@ -83,27 +86,25 @@ namespace Users.API.Services
                     usuarioEncontrado.Activo = false;
                 }
 
-                // Devolver USR-003 igual (al siguiente intento ya recibira USR-004 si quedo bloqueado)
+                // Persistir los cambios en la base
+                _repository.Actualizar(usuarioEncontrado);
+
                 throw new BusinessRuleException("USR-003", "Credenciales incorrectas.");
             }
 
             // Login exitoso: resetear intentos fallidos
             usuarioEncontrado.IntentosFallidos = 0;
 
+            // Persistir el reseteo en la base
+            _repository.Actualizar(usuarioEncontrado);
+
             return MapToResponse(usuarioEncontrado);
         }
+
         public UserResponse ObtenerPorId(Guid id)
         {
-            // Buscar el usuario por Id en la lista
-            User usuarioEncontrado = null;
-            foreach (User user in _users)
-            {
-                if (user.Id == id)
-                {
-                    usuarioEncontrado = user;
-                    break;
-                }
-            }
+            // Buscar el usuario por Id en la base
+            User usuarioEncontrado = _repository.ObtenerPorId(id);
 
             // Si no existe, tirar NotFoundException con USR-007
             if (usuarioEncontrado == null)
@@ -111,43 +112,23 @@ namespace Users.API.Services
                 throw new NotFoundException("USR-007", "Usuario no encontrado.");
             }
 
-            // Devolver el UserResponse sin el PasswordHash
             return MapToResponse(usuarioEncontrado);
         }
 
-
-        // Método auxiliar: convierte User en UserResponse
-        private UserResponse MapToResponse(User user)
-        {
-            UserResponse response = new UserResponse();
-            response.Id = user.Id;
-            response.Nombre = user.Nombre;
-            response.Apellido = user.Apellido;
-            response.Email = user.Email;
-            response.FechaRegistro = user.FechaRegistro;
-            response.Activo = user.Activo;
-            return response;
-        }
-
-        // Valida los campos del request de registro.
-        // Si hay errores, los acumula y lanza una sola ValidationException (USR-002).
         private void ValidarRegisterRequest(RegisterRequest request)
         {
             List<string> errores = new List<string>();
 
-            // Validar Nombre
             if (string.IsNullOrWhiteSpace(request.Nombre))
             {
                 errores.Add("El nombre es obligatorio.");
             }
 
-            // Validar Apellido
             if (string.IsNullOrWhiteSpace(request.Apellido))
             {
                 errores.Add("El apellido es obligatorio.");
             }
 
-            // Validar Email
             if (string.IsNullOrWhiteSpace(request.Email))
             {
                 errores.Add("El email es obligatorio.");
@@ -157,7 +138,6 @@ namespace Users.API.Services
                 errores.Add("El email no tiene un formato válido.");
             }
 
-            // Validar Password
             if (string.IsNullOrWhiteSpace(request.Password))
             {
                 errores.Add("La password es obligatoria.");
@@ -167,7 +147,6 @@ namespace Users.API.Services
                 errores.Add("La password debe tener al menos 8 caracteres.");
             }
 
-            // Si hay errores, lanzar una unica excepcion con todos juntos
             if (errores.Count > 0)
             {
                 string mensaje = "";
@@ -184,19 +163,16 @@ namespace Users.API.Services
             }
         }
 
-        // Busca un usuario por email en la lista. Devuelve null si no existe.
-        private User BuscarUsuarioPorEmail(string email)
+        private UserResponse MapToResponse(User user)
         {
-            foreach (User user in _users)
-            {
-                if (user.Email == email)
-                {
-                    return user;
-                }
-            }
-            return null;
+            UserResponse response = new UserResponse();
+            response.Id = user.Id;
+            response.Nombre = user.Nombre;
+            response.Apellido = user.Apellido;
+            response.Email = user.Email;
+            response.FechaRegistro = user.FechaRegistro;
+            response.Activo = user.Activo;
+            return response;
         }
-
-
     }
 }

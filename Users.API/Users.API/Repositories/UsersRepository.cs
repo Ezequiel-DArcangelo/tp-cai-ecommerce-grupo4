@@ -44,7 +44,7 @@ namespace Users.API.Repositories
 
             SqliteConnection connection = new SqliteConnection(_connectionString);
             connection.Open();
-            User usuario = connection.QueryFirstOrDefault<User>(sql, new { Id = id.ToString() });
+            User usuario = connection.QueryFirstOrDefault<User>(sql, new { Id = id });
             connection.Close();
 
             return usuario;
