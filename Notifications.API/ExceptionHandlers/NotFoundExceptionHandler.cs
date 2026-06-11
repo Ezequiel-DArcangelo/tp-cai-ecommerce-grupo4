@@ -15,10 +15,10 @@ namespace Notifications.API.ExceptionHandlers
                type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
                title = "Not Found",
                status = 404,
-               detail = "El recurso solicitado no fue encontrado.",
-               instance = context.Request.Path.Value,
-               errorCode = ex.ErrorCode,
-               errorMessage = ex.Message
+               detail = ex.Message,
+                instance = context.Request.Path.Value,
+               errorCode = ex.ErrorCode,// Toma dinámicamente NTF-001 o NTF-003 dependiendo del caso
+                errorMessage = ex.Message
             }, cancellationToken);
 
             return true;

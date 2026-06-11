@@ -17,6 +17,23 @@ builder.Services.AddProblemDetails();
 // Registro de controladores
 builder.Services.AddControllers();
 
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        return new Microsoft.AspNetCore.Mvc.BadRequestObjectResult(new
+        {
+            type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            title = "Bad Request",
+            status = 400,
+            detail = "Los datos de la notificación son inválidos.",
+            instance = context.HttpContext.Request.Path.Value,
+            errorCode = "NTF-002",
+            errorMessage = "Los datos de la notificación son inválidos o el tipo no es reconocido."
+        });
+    };
+});
+
 // Registro de servicios de la aplicación
 builder.Services.AddScoped<Notifications.API.Services.NotificationService>();
 

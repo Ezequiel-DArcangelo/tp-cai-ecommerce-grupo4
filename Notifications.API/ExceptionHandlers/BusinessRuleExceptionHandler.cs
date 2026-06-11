@@ -15,9 +15,9 @@ namespace Notifications.API.ExceptionHandlers
                 type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
                 title = "Bad Request",
                 status = 400,
-                detail = "La solicitud no cumple con las reglas de negocio.",
+                detail = ex.Message,
                 instance = context.Request.Path.Value,
-                errorCode = ex.ErrorCode,
+                errorCode = ex.ErrorCode, // Toma dinámicamente NTF-002
                 errorMessage = ex.Message
             }, cancellationToken);
 

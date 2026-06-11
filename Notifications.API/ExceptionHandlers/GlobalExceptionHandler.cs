@@ -15,6 +15,7 @@ namespace Notifications.API.ExceptionHandlers
                 status = 500,
                 detail = "Ocurrió un error inesperado en el servidor.",
                 instance = context.Request.Path.Value,
+                errorCode = "NTF-004", // Código genérico para errores no manejados
                 errorMessage = exception.Message
             }, cancellationToken);
 

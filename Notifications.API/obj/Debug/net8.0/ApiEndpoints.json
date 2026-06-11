@@ -1,0 +1,44 @@
+[
+  {
+    "ContainingType": "Notifications.API.Controllers.NotificationsController",
+    "Method": "GetByUserId",
+    "RelativePath": "api/notifications/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Notifications.API.Controllers.NotificationsController",
+    "Method": "SendNotification",
+    "RelativePath": "api/notifications/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Notifications.API.DTOs.CreateNotificationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Notifications.API.DTOs.NotificationResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
