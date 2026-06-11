@@ -8,24 +8,39 @@ namespace Notifications.API.Services;
 public class NotificationService
 {
     private readonly NotificationRepository _notificationRepository;
+    private readonly IHttpClientFactory _httpClientFactory;
 
-    // Control de existencia de usuarios 
-    private static readonly List<Guid> _existingUsersMock = new()
-    {
-        Guid.Parse("a1b2c3d4-0000-0000-0000-111122223333")
-    };
-
-    
-    public NotificationService(NotificationRepository notificationRepository)
+    public NotificationService(NotificationRepository notificationRepository, IHttpClientFactory httpClientFactory)
     {
         _notificationRepository = notificationRepository;
+        _httpClientFactory = httpClientFactory;
     }
 
-    // 1. Lógica para registrar/enviar (POST)
-    public NotificationResponse SendNotification(CreateNotificationRequest request)
+    private async Task<bool> ExisteUsuario(Guid usuarioId)
     {
-        // Validamos la existencia de usuario (llamado a la API de Usuarios)
-        if (!_existingUsersMock.Contains(request.UsuarioId))
+        HttpClient client = _httpClientFactory.CreateClient();
+
+        string url = "https://localhost:7206/api/users/" + usuarioId.ToString();
+
+        HttpResponseMessage respuesta = await client.GetAsync(url);
+
+        // Si la API de Usuarios devuelve 404, el usuario no existe en el sistema 
+        if (respuesta.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return false; 
+        }
+
+        return true;
+    }
+
+    
+
+    // 1. Lógica para registrar/enviar (POST)
+    public async Task<NotificationResponse> SendNotificationAsync(CreateNotificationRequest request)
+    {
+        // Llamada HTTP a la API de Usuarios
+        bool usuarioExiste = await ExisteUsuario(request.UsuarioId);
+        if (!usuarioExiste)
         {
             throw new NotFoundException("NTF-001", "El usuario destinatario no fue encontrado.");
         }

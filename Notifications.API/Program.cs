@@ -17,6 +17,7 @@ builder.Services.AddProblemDetails();
 // Registro de controladores
 builder.Services.AddControllers();
 
+// Configuración para que las respuestas de error de validación de modelo sean consistentes
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = context =>
@@ -39,6 +40,7 @@ builder.Services.AddScoped<Notifications.API.Services.NotificationService>();
 
 // Registro del repositorio de notificaciones para acceso a datos (SQLite)
 builder.Services.AddScoped<Notifications.API.Repositories.NotificationRepository>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

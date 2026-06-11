@@ -16,9 +16,10 @@ public class NotificationsController : ControllerBase
 
     // Endpoint para enviar una notificación (POST /api/notifications/send)
     [HttpPost("send")]
-    public ActionResult<NotificationResponse> SendNotification([FromBody] CreateNotificationRequest request)
+    public async Task<ActionResult<NotificationResponse>> SendNotification([FromBody] CreateNotificationRequest request)
     {
-        var response = _notificationService.SendNotification(request);
+        // Esperamos la respuesta del servicio que ahora valida contra Usuarios
+        var response = await _notificationService.SendNotificationAsync(request);
 
         // Retorna la notificación creada con un código de estado 201 (Created)
         return CreatedAtAction(nameof(GetByUserId), new { userId = response.UsuarioId }, response);
