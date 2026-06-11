@@ -37,6 +37,9 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(options 
 // Registro de servicios de la aplicación
 builder.Services.AddScoped<Notifications.API.Services.NotificationService>();
 
+// Registro del repositorio de notificaciones para acceso a datos (SQLite)
+builder.Services.AddScoped<Notifications.API.Repositories.NotificationRepository>();
+
 var app = builder.Build();
 
 // Configuración del middleware
