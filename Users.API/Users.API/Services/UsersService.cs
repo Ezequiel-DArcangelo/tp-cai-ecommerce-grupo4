@@ -92,6 +92,29 @@ namespace Users.API.Services
 
             return MapToResponse(usuarioEncontrado);
         }
+        public UserResponse ObtenerPorId(Guid id)
+        {
+            // Buscar el usuario por Id en la lista
+            User usuarioEncontrado = null;
+            foreach (User user in _users)
+            {
+                if (user.Id == id)
+                {
+                    usuarioEncontrado = user;
+                    break;
+                }
+            }
+
+            // Si no existe, tirar NotFoundException con USR-007
+            if (usuarioEncontrado == null)
+            {
+                throw new NotFoundException("USR-007", "Usuario no encontrado.");
+            }
+
+            // Devolver el UserResponse sin el PasswordHash
+            return MapToResponse(usuarioEncontrado);
+        }
+
 
         // Método auxiliar: convierte User en UserResponse
         private UserResponse MapToResponse(User user)

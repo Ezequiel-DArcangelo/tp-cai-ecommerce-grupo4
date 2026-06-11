@@ -28,5 +28,12 @@ namespace Users.API.Controllers
             UserResponse response = _usersService.Login(request);
             return Ok(response);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult ObtenerPorId(Guid id)
+        {
+            UserResponse response = _usersService.ObtenerPorId(id);
+            return Ok(response);
+        }
     }
 }
