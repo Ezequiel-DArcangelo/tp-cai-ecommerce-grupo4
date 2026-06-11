@@ -1,5 +1,6 @@
 using Users.API.Services;
 using Users.API.ExceptionHandlers;
+using Users.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,10 @@ builder.Services.AddProblemDetails();
 
 
 var app = builder.Build();
+
+// Inicializar la base de datos (crea el archivo .db y la tabla Users si no existen)
+string connectionString = builder.Configuration.GetConnectionString("UsersDb");
+DatabaseInitializer.Initialize(connectionString);
 
 // Activar el manejo global de excepciones (usa los handlers registrados arriba)
 app.UseExceptionHandler();

@@ -40,3 +40,7 @@ publish/
 # Logs
 logs/
 *.log
+
+# Archivos de base de datos SQLite
+*.db
+*.db-journal
