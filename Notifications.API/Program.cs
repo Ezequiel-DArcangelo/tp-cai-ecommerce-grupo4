@@ -14,6 +14,12 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 // Formato estándar para respuestas de error (ProblemDetails)
 builder.Services.AddProblemDetails();
 
+// Registro de controladores
+builder.Services.AddControllers();
+
+// Registro de servicios de la aplicación
+builder.Services.AddScoped<Notifications.API.Services.NotificationService>();
+
 var app = builder.Build();
 
 // Configuración del middleware
@@ -27,7 +33,7 @@ app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
-
-//...
+// Mapea las rutas definidas en los controladores
+app.MapControllers();
 
 app.Run();
