@@ -1,6 +1,7 @@
 ﻿using Users.API.DTOs;
 using Users.API.Models;
 using Users.API.Exceptions;
+using BCrypt.Net;
 
 
 namespace Users.API.Services
@@ -30,7 +31,8 @@ namespace Users.API.Services
             newUser.Nombre = request.Nombre;
             newUser.Apellido = request.Apellido;
             newUser.Email = request.Email;
-            newUser.PasswordHash = request.Password; // TODO: hashear
+            // Hashear la password antes de guardarla. BCrypt genera el salt automaticamente.
+            newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
             newUser.FechaRegistro = DateTime.UtcNow;
             newUser.Activo = true;
             newUser.IntentosFallidos = 0;
@@ -69,8 +71,8 @@ namespace Users.API.Services
                     "Su cuenta fue bloqueada por superar el máximo de intentos fallidos. Contacte a soporte.");
             }
 
-            // Verificar la password
-            if (usuarioEncontrado.PasswordHash != request.Password)
+            // Verificar la password usando BCrypt (compara contra el hash guardado)
+            if (BCrypt.Net.BCrypt.Verify(request.Password, usuarioEncontrado.PasswordHash) == false)
             {
                 // Password incorrecta: sumar intento fallido
                 usuarioEncontrado.IntentosFallidos = usuarioEncontrado.IntentosFallidos + 1;
