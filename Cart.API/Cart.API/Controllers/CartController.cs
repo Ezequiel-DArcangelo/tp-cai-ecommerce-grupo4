@@ -17,42 +17,42 @@ namespace Cart.API.Controllers
 
         // GET /api/cart/{userId}
         [HttpGet("{userId}")]
-        public IActionResult GetCart(Guid userId)
+        public async Task<IActionResult> GetCart(Guid userId)
         {
-            var response = _cartService.GetCart(userId);
-            return Ok(response); // 200 OK (si no existe, lanza CRT-001 y el handler devuelve 404)
+            var response = await _cartService.GetCartAsync(userId);
+            return Ok(response);
         }
 
         // POST /api/cart/{userId}/items
         [HttpPost("{userId}/items")]
-        public IActionResult AddItem(Guid userId, [FromBody] AddItemRequest request)
+        public async Task<IActionResult> AddItem(Guid userId, [FromBody] AddItemRequest request)
         {
-            var response = _cartService.AddItem(userId, request);
-            return Ok(response); // 200 OK
+            var response = await _cartService.AddItemAsync(userId, request);
+            return Ok(response);
         }
 
         // PUT /api/cart/{userId}/items/{productId}
         [HttpPut("{userId}/items/{productId}")]
-        public IActionResult UpdateItem(Guid userId, Guid productId, [FromBody] UpdateItemRequest request)
+        public async Task<IActionResult> UpdateItem(Guid userId, Guid productId, [FromBody] UpdateItemRequest request)
         {
-            var response = _cartService.UpdateItem(userId, productId, request);
-            return Ok(response); // 200 OK
+            var response = await _cartService.UpdateItemAsync(userId, productId, request);
+            return Ok(response);
         }
 
         // DELETE /api/cart/{userId}/items/{productId}
         [HttpDelete("{userId}/items/{productId}")]
-        public IActionResult RemoveItem(Guid userId, Guid productId)
+        public async Task<IActionResult> RemoveItem(Guid userId, Guid productId)
         {
-            _cartService.RemoveItem(userId, productId);
-            return NoContent(); // 204 No Content
+            await _cartService.RemoveItemAsync(userId, productId);
+            return NoContent();
         }
 
         // DELETE /api/cart/{userId}
         [HttpDelete("{userId}")]
-        public IActionResult ClearCart(Guid userId)
+        public async Task<IActionResult> ClearCart(Guid userId)
         {
-            _cartService.ClearCart(userId);
-            return NoContent(); // 204 No Content
+            await _cartService.ClearCartAsync(userId);
+            return NoContent();
         }
     }
 }

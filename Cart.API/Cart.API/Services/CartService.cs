@@ -1,120 +1,116 @@
-﻿using Cart.API.DTOs;
+﻿using Cart.API.Data;
+using Cart.API.DTOs;
 using Cart.API.Exceptions;
-using Cart.API.Models;
 
 namespace Cart.API.Services
 {
     public class CartService
     {
-        // Diccionario en memoria que simula la base de datos: userId -> Cart
-        private static Dictionary<Guid, Cart.API.Models.Cart> _carts = new Dictionary<Guid, Cart.API.Models.Cart>();
+        private readonly CartRepository _repository;
+        private readonly ILogger<CartService> _logger;
+
+        public CartService(CartRepository repository, ILogger<CartService> logger)
+        {
+            _repository = repository;
+            _logger = logger;
+        }
 
         // GET /api/cart/{userId}
-        public CartResponse GetCart(Guid userId)
+        public async Task<CartResponse> GetCartAsync(Guid userId)
         {
-            if (!_carts.TryGetValue(userId, out var cart))
+            var cart = await _repository.GetCartAsync(userId);
+            if (cart == null)
                 throw new NotFoundException("CRT-001", $"El usuario con ID {userId} no tiene un carrito activo.");
 
-            return MapToResponse(cart);
+            var items = await _repository.GetItemsAsync(userId);
+            return MapToResponse(userId, items);
         }
 
         // POST /api/cart/{userId}/items
-        public CartResponse AddItem(Guid userId, AddItemRequest request)
+        public async Task<CartResponse> AddItemAsync(Guid userId, AddItemRequest request)
         {
             ValidarCantidad(request.Cantidad);
             ValidarProductoId(request.ProductoId);
 
-            if (!_carts.TryGetValue(userId, out var cart))
-            {
-                // Si no tiene carrito, se crea uno nuevo
-                cart = new Cart.API.Models.Cart
-                {
-                    UsuarioId = userId,
-                    Items = new List<CartItemDTO>(),
-                    FechaActualizacion = DateTime.UtcNow
-                };
-                _carts[userId] = cart;
-            }
+            await _repository.CreateCartAsync(userId);
+            await _repository.AddOrUpdateItemAsync(userId, request.ProductoId, request.Cantidad);
 
-            var itemExistente = cart.Items.FirstOrDefault(i => i.ProductoId == request.ProductoId);
-            if (itemExistente != null)
-            {
-                // Si el producto ya está en el carrito, se suma la cantidad
-                itemExistente.Cantidad += request.Cantidad;
-            }
-            else
-            {
-                cart.Items.Add(new CartItemDTO
-                {
-                    ProductoId = request.ProductoId,
-                    Cantidad = request.Cantidad
-                });
-            }
+            _logger.LogInformation("Producto {ProductoId} agregado al carrito del usuario {UserId}",
+                request.ProductoId, userId);
 
-            cart.FechaActualizacion = DateTime.UtcNow;
-            return MapToResponse(cart);
+            var items = await _repository.GetItemsAsync(userId);
+            return MapToResponse(userId, items);
         }
 
         // PUT /api/cart/{userId}/items/{productId}
-        public CartResponse UpdateItem(Guid userId, Guid productId, UpdateItemRequest request)
+        public async Task<CartResponse> UpdateItemAsync(Guid userId, Guid productId, UpdateItemRequest request)
         {
             ValidarCantidad(request.Cantidad);
             ValidarProductoId(productId);
 
-            if (!_carts.TryGetValue(userId, out var cart))
+            var cart = await _repository.GetCartAsync(userId);
+            if (cart == null)
                 throw new NotFoundException("CRT-001", $"El usuario con ID {userId} no tiene un carrito activo.");
 
-            var item = cart.Items.FirstOrDefault(i => i.ProductoId == productId);
-            if (item == null)
+            var updated = await _repository.UpdateItemAsync(userId, productId, request.Cantidad);
+            if (!updated)
                 throw new NotFoundException("CRT-002", $"El producto con ID {productId} no existe en el carrito.");
 
-            item.Cantidad = request.Cantidad;
-            cart.FechaActualizacion = DateTime.UtcNow;
-            return MapToResponse(cart);
+            _logger.LogInformation("Cantidad actualizada para producto {ProductoId} en carrito de usuario {UserId}",
+                productId, userId);
+
+            var items = await _repository.GetItemsAsync(userId);
+            return MapToResponse(userId, items);
         }
 
         // DELETE /api/cart/{userId}/items/{productId}
-        public void RemoveItem(Guid userId, Guid productId)
+        public async Task RemoveItemAsync(Guid userId, Guid productId)
         {
-            if (!_carts.TryGetValue(userId, out var cart))
+            var cart = await _repository.GetCartAsync(userId);
+            if (cart == null)
                 throw new NotFoundException("CRT-001", $"El usuario con ID {userId} no tiene un carrito activo.");
 
-            var item = cart.Items.FirstOrDefault(i => i.ProductoId == productId);
-            if (item == null)
+            var removed = await _repository.DeleteItemAsync(userId, productId);
+            if (!removed)
                 throw new NotFoundException("CRT-002", $"El producto con ID {productId} no existe en el carrito.");
 
-            cart.Items.Remove(item);
-            cart.FechaActualizacion = DateTime.UtcNow;
+            _logger.LogInformation("Producto {ProductoId} eliminado del carrito del usuario {UserId}",
+                productId, userId);
         }
 
         // DELETE /api/cart/{userId}
-        public void ClearCart(Guid userId)
+        public async Task ClearCartAsync(Guid userId)
         {
-            if (!_carts.ContainsKey(userId))
+            var cart = await _repository.GetCartAsync(userId);
+            if (cart == null)
                 throw new NotFoundException("CRT-001", $"El usuario con ID {userId} no tiene un carrito activo.");
 
-            _carts.Remove(userId);
+            await _repository.ClearCartAsync(userId);
+
+            _logger.LogInformation("Carrito del usuario {UserId} vaciado", userId);
         }
 
-        // Auxiliar: convertir Cart en CartResponse
-        private CartResponse MapToResponse(Cart.API.Models.Cart cart)
+        // Auxiliar: armar CartResponse desde los items
+        private CartResponse MapToResponse(Guid userId, IEnumerable<Models.CartItemEntity> items)
         {
             return new CartResponse
             {
-                UsuarioId = cart.UsuarioId,
-                Items = cart.Items,
-                FechaActualizacion = cart.FechaActualizacion
+                UsuarioId = userId,
+                Items = items.Select(i => new CartItemDTO
+                {
+                    ProductoId = Guid.Parse(i.ProductoId),
+                    Cantidad = i.Cantidad
+                }).ToList(),
+                FechaActualizacion = DateTime.UtcNow
             };
         }
 
-        // Auxiliar: validar que la cantidad sea mayor a 0 (CRT-004)
         private void ValidarCantidad(int cantidad)
         {
             if (cantidad <= 0)
                 throw new ValidationException("CRT-004", "La cantidad debe ser mayor a cero.");
         }
 
-        // Auxiliar: simular validación de producto en Products API (CRT-002)
         private void ValidarProductoId(Guid productoId)
         {
             if (productoId == Guid.Empty)
