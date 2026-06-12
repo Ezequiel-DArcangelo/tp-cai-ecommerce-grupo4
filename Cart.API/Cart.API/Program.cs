@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using Serilog.Events;
 
-// ── Serilog ───────────────────────────────────────────────────────────────────
+// Serilog
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -37,7 +37,7 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
-// ── Servicios ─────────────────────────────────────────────────────────────────
+//Servicios 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>
     {
@@ -47,19 +47,25 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Repositorio, inicializador y servicio
+
+// HTTP Client para Products API
+builder.Services.AddHttpClient<ProductsApiClient>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7196");
+});
+
 builder.Services.AddSingleton<CartRepository>();
 builder.Services.AddSingleton<CartDatabaseInitializer>();
-builder.Services.AddSingleton<CartService>();
+builder.Services.AddScoped<CartService>();
 
-// Exception handlers (del más específico al más genérico)
+
 builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
 builder.Services.AddExceptionHandler<BusinessRuleExceptionHandler>();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddExceptionHandler<GenericExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-// Health Checks
+
 builder.Services.AddHealthChecks()
     .AddCheck<SqliteHealthCheck>("sqlite-db", tags: ["database"])
     .AddCheck<ApiStatusCheck>("api-status", tags: ["api"]);
@@ -72,13 +78,13 @@ builder.Services.AddHealthChecksUI(setup =>
 
 var app = builder.Build();
 
-// ── Inicializar base de datos ─────────────────────────────────────────────────
+// Inicializar base de datos
 using (var scope = app.Services.CreateScope())
     scope.ServiceProvider
         .GetRequiredService<CartDatabaseInitializer>()
         .Initialize();
 
-// ── Pipeline ──────────────────────────────────────────────────────────────────
+// Pipeline
 app.UseExceptionHandler();
 
 app.UseSerilogRequestLogging(options =>
@@ -89,6 +95,7 @@ app.UseSerilogRequestLogging(options =>
             ? LogEventLevel.Verbose : LogEventLevel.Information;
 });
 
+app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<AuditMiddleware>();
 
 if (app.Environment.IsDevelopment())

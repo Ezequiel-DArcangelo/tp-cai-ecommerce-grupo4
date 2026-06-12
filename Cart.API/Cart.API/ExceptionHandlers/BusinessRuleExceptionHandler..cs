@@ -12,6 +12,8 @@ namespace Cart.API.ExceptionHandlers
         {
             if (exception is BusinessRuleException businessRuleException)
             {
+                var correlationId = context.Items["X-Correlation-Id"]?.ToString() ?? string.Empty;
+
                 int statusCode = 422;
                 string title = "Unprocessable Entity";
                 string detail = "No se puede procesar la solicitud.";
@@ -26,7 +28,8 @@ namespace Cart.API.ExceptionHandlers
                     detail = detail,
                     instance = context.Request.Path.Value,
                     errorCode = businessRuleException.ErrorCode,
-                    errorMessage = businessRuleException.Message
+                    errorMessage = businessRuleException.Message,
+                    correlationId = correlationId
                 };
                 await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
                 return true;

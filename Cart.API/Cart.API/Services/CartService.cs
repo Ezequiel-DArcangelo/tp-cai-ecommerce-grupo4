@@ -7,15 +7,16 @@ namespace Cart.API.Services
     public class CartService
     {
         private readonly CartRepository _repository;
+        private readonly ProductsApiClient _productsApiClient;
         private readonly ILogger<CartService> _logger;
 
-        public CartService(CartRepository repository, ILogger<CartService> logger)
+        public CartService(CartRepository repository, ProductsApiClient productsApiClient, ILogger<CartService> logger)
         {
             _repository = repository;
+            _productsApiClient = productsApiClient;
             _logger = logger;
         }
 
-        // GET /api/cart/{userId}
         public async Task<CartResponse> GetCartAsync(Guid userId)
         {
             var cart = await _repository.GetCartAsync(userId);
@@ -26,11 +27,16 @@ namespace Cart.API.Services
             return MapToResponse(userId, items);
         }
 
-        // POST /api/cart/{userId}/items
         public async Task<CartResponse> AddItemAsync(Guid userId, AddItemRequest request)
         {
             ValidarCantidad(request.Cantidad);
             ValidarProductoId(request.ProductoId);
+
+            // Validar que el producto existe y tiene stock suficiente
+            var product = await _productsApiClient.GetProductAsync(request.ProductoId);
+            if (product!.Stock < request.Cantidad)
+                throw new BusinessRuleException("CRT-003",
+                    $"Stock insuficiente. Disponible: {product.Stock}, solicitado: {request.Cantidad}.");
 
             await _repository.CreateCartAsync(userId);
             await _repository.AddOrUpdateItemAsync(userId, request.ProductoId, request.Cantidad);
@@ -42,7 +48,6 @@ namespace Cart.API.Services
             return MapToResponse(userId, items);
         }
 
-        // PUT /api/cart/{userId}/items/{productId}
         public async Task<CartResponse> UpdateItemAsync(Guid userId, string productId, UpdateItemRequest request)
         {
             ValidarCantidad(request.Cantidad);
@@ -51,6 +56,12 @@ namespace Cart.API.Services
             var cart = await _repository.GetCartAsync(userId);
             if (cart == null)
                 throw new NotFoundException("CRT-001", $"El usuario con ID {userId} no tiene un carrito activo.");
+
+            // Validar stock al actualizar cantidad
+            var product = await _productsApiClient.GetProductAsync(productId);
+            if (product!.Stock < request.Cantidad)
+                throw new BusinessRuleException("CRT-003",
+                    $"Stock insuficiente. Disponible: {product.Stock}, solicitado: {request.Cantidad}.");
 
             var updated = await _repository.UpdateItemAsync(userId, productId, request.Cantidad);
             if (!updated)
@@ -63,7 +74,6 @@ namespace Cart.API.Services
             return MapToResponse(userId, items);
         }
 
-        // DELETE /api/cart/{userId}/items/{productId}
         public async Task RemoveItemAsync(Guid userId, string productId)
         {
             var cart = await _repository.GetCartAsync(userId);
@@ -78,7 +88,6 @@ namespace Cart.API.Services
                 productId, userId);
         }
 
-        // DELETE /api/cart/{userId}
         public async Task ClearCartAsync(Guid userId)
         {
             var cart = await _repository.GetCartAsync(userId);
@@ -86,11 +95,9 @@ namespace Cart.API.Services
                 throw new NotFoundException("CRT-001", $"El usuario con ID {userId} no tiene un carrito activo.");
 
             await _repository.ClearCartAsync(userId);
-
             _logger.LogInformation("Carrito del usuario {UserId} vaciado", userId);
         }
 
-        // Auxiliar: armar CartResponse desde los items
         private CartResponse MapToResponse(Guid userId, IEnumerable<Models.CartItemEntity> items)
         {
             return new CartResponse
@@ -113,8 +120,8 @@ namespace Cart.API.Services
 
         private void ValidarProductoId(string productoId)
         {
-            if (productoId == string.Empty)
-                throw new NotFoundException("CRT-002", $"El producto con ID {productoId} no existe.");
+            if (string.IsNullOrWhiteSpace(productoId))
+                throw new NotFoundException("CRT-002", "El ID del producto no puede estar vacío.");
         }
     }
 }

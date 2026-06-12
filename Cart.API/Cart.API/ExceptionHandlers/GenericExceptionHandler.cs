@@ -9,6 +9,7 @@ namespace Cart.API.ExceptionHandlers
             Exception exception,
             CancellationToken cancellationToken)
         {
+            var correlationId = context.Items["X-Correlation-Id"]?.ToString() ?? string.Empty;
             int statusCode = 500;
             string title = "Internal Server Error";
             string detail = "Error interno al procesar el carrito.";
@@ -23,7 +24,8 @@ namespace Cart.API.ExceptionHandlers
                 detail = detail,
                 instance = context.Request.Path.Value,
                 errorCode = "CRT-005",
-                errorMessage = exception.Message
+                errorMessage = exception.Message,
+                correlationId = correlationId
             };
             await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
             return true;
