@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Orders.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56970;http://localhost:56971",
+      "launchUrl": "swagger"
+    }
+  }
+}
