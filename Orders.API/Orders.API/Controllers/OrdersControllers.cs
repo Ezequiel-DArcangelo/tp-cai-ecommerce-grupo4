@@ -15,36 +15,44 @@ namespace Orders.API.Controllers
             _ordersService = ordersService;
         }
 
-        // GET /api/orders?usuarioId=123
+        // GET /api/orders?usuarioId=abc
         [HttpGet]
-        public IActionResult GetOrders([FromQuery] int? usuarioId)
+        public async Task<IActionResult> GetOrders([FromQuery] string? usuarioId)
         {
-            var response = _ordersService.GetOrders(usuarioId);
-            return Ok(response); // 200 OK
+            var response = await _ordersService.GetOrders(usuarioId);
+            return Ok(response);
         }
 
         // GET /api/orders/{id}
         [HttpGet("{id}")]
-        public IActionResult GetOrderById(int id)
+        public async Task<IActionResult> GetOrderById(string id)
         {
-            var response = _ordersService.GetOrderById(id);
-            return Ok(response); // 200 OK (si no existe, lanza ORD-001 y el handler devuelve 404)
+            var response = await _ordersService.GetOrderById(id);
+            return Ok(response);
         }
 
         // POST /api/orders
         [HttpPost]
-        public IActionResult CreateOrder([FromBody] CreateOrderRequest request)
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
         {
-            var response = _ordersService.CreateOrder(request);
-            return StatusCode(201, response); // 201 Created
+            var response = await _ordersService.CreateOrder(request);
+            return StatusCode(201, response);
         }
 
         // PUT /api/orders/{id}/status
         [HttpPut("{id}/status")]
-        public IActionResult UpdateOrderStatus(int id, [FromBody] UpdateOrderStatusRequest request)
+        public async Task<IActionResult> UpdateOrderStatus(string id, [FromBody] UpdateOrderStatusRequest request)
         {
-            var response = _ordersService.UpdateOrderStatus(id, request);
-            return Ok(response); // 200 OK (si transición inválida, lanza ORD-006 y el handler devuelve 409)
+            var response = await _ordersService.UpdateOrderStatus(id, request);
+            return Ok(response);
+        }
+
+        // GET /api/orders/check-product/{productId}
+        [HttpGet("check-product/{id}")]
+        public async Task<IActionResult> CheckProductActiveOrders(string id)
+        {
+            bool tieneOrdenes = await _ordersService.ExisteProductoEnOrdenesActivas(id);
+            return Ok(new { TieneOrdenesActivas = tieneOrdenes });
         }
     }
 }

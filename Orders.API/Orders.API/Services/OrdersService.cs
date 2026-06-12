@@ -1,102 +1,102 @@
-﻿using Orders.API.DTOs;
-using Orders.API.Models;
+﻿using Orders.API.Data;
+using Orders.API.DTOs;
 using Orders.API.Exceptions;
+using Orders.API.Models;
 
 namespace Orders.API.Services
 {
     public class OrdersService
     {
-        // Lista en memoria que simula la base de datos
-        private static List<Order> _orders = new List<Order>();
-        private static int _nextId = 1;
+        private readonly OrdersRepository _repository;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ILogger<OrdersService> _logger;
+
+        public OrdersService(OrdersRepository repository, IHttpClientFactory httpClientFactory, ILogger<OrdersService> logger)
+        {
+            _repository = repository;
+            _httpClientFactory = httpClientFactory;
+            _logger = logger;
+        }
 
         // Obtener todas las órdenes (con filtro opcional por usuarioId)
-        public List<OrderResponse> GetOrders(int? usuarioId = null)
+        public async Task<List<OrderResponse>> GetOrders(string? usuarioId = null)
         {
-            var query = _orders.AsQueryable();
-
-            if (usuarioId.HasValue)
-            {
-                query = query.Where(o => o.UsuarioId == usuarioId.Value);
-            }
-
-            return query.Select(o => MapToResponse(o)).ToList();
+            var orders = await _repository.GetAllAsync(usuarioId);
+            return orders.Select(o => MapToResponse(o)).ToList();
         }
+
         // Obtener una orden por ID
-        public OrderResponse GetOrderById(int id)
+        public async Task<OrderResponse> GetOrderById(string id)
         {
-            Order order = _orders.FirstOrDefault(o => o.Id == id);
+            var order = await _repository.GetByIdAsync(id);
             if (order == null)
-            {
                 throw new NotFoundException("ORD-001", $"La orden con ID {id} no existe.");
-            }
+
             return MapToResponse(order);
         }
 
         // Crear una nueva orden
-        public OrderResponse CreateOrder(CreateOrderRequest request)
+        public async Task<OrderResponse> CreateOrder(CreateOrderRequest request)
         {
             // Validar campos (ORD-002)
             ValidarCreateOrderRequest(request);
 
-            // Simular validación de usuario y productos (ORD-003)
-            if (request.UsuarioId <= 0)
-            {
+            // Validar que el usuario exista en Users API (ORD-003)
+            bool usuarioExiste = await ExisteUsuario(request.UsuarioId);
+            if (!usuarioExiste)
                 throw new NotFoundException("ORD-003", $"El usuario con ID {request.UsuarioId} no existe.");
-            }
 
+            // Validar productos en Products API (ORD-004 y ORD-005)
             foreach (var item in request.Items)
             {
-                if (item.ProductoId <= 0)
-                {
-                    throw new NotFoundException("ORD-003", $"El producto con ID {item.ProductoId} no existe.");
-                }
+                var producto = await GetProducto(item.ProductoId);
+                if (producto == null)
+                    throw new NotFoundException("ORD-004", $"El producto con ID {item.ProductoId} no existe.");
 
-                // Simular stock insuficiente (ORD-005)
-                if (item.Cantidad > 5) // ejemplo: límite ficticio
-                {
-                    throw new BusinessRuleException(
-                        "ORD-005",
-                        $"Stock insuficiente para 'Producto {item.ProductoId}'. Disponible: 5, solicitado: {item.Cantidad}."
-                    );
-                }
+                if (producto.Stock < item.Cantidad)
+                    throw new BusinessRuleException("ORD-005",
+                        $"Stock insuficiente para '{producto.Nombre}'. Disponible: {producto.Stock}, solicitado: {item.Cantidad}.");
             }
 
             // Crear la orden
-            Order newOrder = new Order
+            var newOrder = new Order
             {
-                Id = _nextId++,
+                Id = Guid.NewGuid().ToString(),
                 UsuarioId = request.UsuarioId,
                 Items = request.Items,
-                Total = request.Items.Sum(i => i.Cantidad * 100), // precio ficticio
+                Total = request.Items.Sum(i => i.Cantidad * i.PrecioUnitario),
                 Estado = "Pendiente",
-                FechaCreacion = DateTime.UtcNow
+                FechaCreacion = DateTime.UtcNow.ToString("o")
             };
 
-            _orders.Add(newOrder);
-            return MapToResponse(newOrder);
+            var created = await _repository.CreateAsync(newOrder);
+            _logger.LogInformation("Orden {OrderId} creada para usuario {UsuarioId}", created.Id, created.UsuarioId);
+            return MapToResponse(created);
         }
 
         // Actualizar estado de una orden
-        public OrderResponse UpdateOrderStatus(int id, UpdateOrderStatusRequest request)
+        public async Task<OrderResponse> UpdateOrderStatus(string id, UpdateOrderStatusRequest request)
         {
-            Order order = _orders.FirstOrDefault(o => o.Id == id);
+            var order = await _repository.GetByIdAsync(id);
             if (order == null)
-            {
                 throw new NotFoundException("ORD-001", $"La orden con ID {id} no existe.");
-            }
 
             // Validar transición de estado (ORD-006)
             if (order.Estado == "Entregada" && request.NuevoEstado == "Pendiente")
-            {
-                throw new BusinessRuleException(
-                    "ORD-006",
-                    $"Con orden en estado 'Entregada' no puede volver a 'Pendiente'."
-                );
-            }
+                throw new BusinessRuleException("ORD-006",
+                    $"Con orden en estado 'Entregada' no puede volver a 'Pendiente'.");
 
-            order.Estado = request.NuevoEstado;
-            return MapToResponse(order);
+            await _repository.UpdateStatusAsync(id, request.NuevoEstado);
+            _logger.LogInformation("Orden {OrderId} actualizada a estado {Estado}", id, request.NuevoEstado);
+
+            var updated = await _repository.GetByIdAsync(id);
+            return MapToResponse(updated!);
+        }
+
+        // Verificar si un producto tiene órdenes activas (para Products API)
+        public async Task<bool> ExisteProductoEnOrdenesActivas(string productoId)
+        {
+            return await _repository.ExisteProductoEnOrdenesActivasAsync(productoId);
         }
 
         // Auxiliar: convertir Order en OrderResponse
@@ -118,17 +118,57 @@ namespace Orders.API.Services
         {
             List<string> errores = new List<string>();
 
-            if (request.UsuarioId <= 0)
+            if (string.IsNullOrWhiteSpace(request.UsuarioId))
                 errores.Add("El UsuarioId es obligatorio y debe ser válido.");
 
             if (request.Items == null || request.Items.Count == 0)
                 errores.Add("Debe incluir al menos un producto en la orden.");
 
             if (errores.Count > 0)
+                throw new ValidationException("ORD-002", string.Join(" ", errores));
+        }
+
+        // Validar usuario en Users API (ORD-003)
+        private async Task<bool> ExisteUsuario(string usuarioId)
+        {
+            try
             {
-                string mensaje = string.Join(" ", errores);
-                throw new ValidationException("ORD-002", mensaje);
+                var client = _httpClientFactory.CreateClient();
+                var respuesta = await client.GetAsync($"https://localhost:7206/api/users/{usuarioId}");
+                return respuesta.StatusCode != System.Net.HttpStatusCode.NotFound;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al consultar Users API para usuario {UsuarioId}", usuarioId);
+                throw new BusinessRuleException("ORD-007", "Error al comunicarse con Users API.");
             }
         }
+
+        // Obtener producto de Products API (ORD-004, ORD-005)
+        private async Task<ProductoDto?> GetProducto(string productoId)
+        {
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                var respuesta = await client.GetAsync($"https://localhost:7196/api/products/{productoId}");
+                if (respuesta.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    return null;
+
+                return await respuesta.Content.ReadFromJsonAsync<ProductoDto>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al consultar Products API para producto {ProductoId}", productoId);
+                throw new BusinessRuleException("ORD-007", "Error al comunicarse con Products API.");
+            }
+        }
+    }
+
+    public class ProductoDto
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Nombre { get; set; } = string.Empty;
+        public int Stock { get; set; }
+        public decimal Precio { get; set; }
     }
 }

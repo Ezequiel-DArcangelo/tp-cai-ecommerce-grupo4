@@ -2,7 +2,7 @@
 {
     public class CreateOrderRequest
     {
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; } = string.Empty;
         public List<OrderItemDTO> Items { get; set; } = new List<OrderItemDTO>();
     }
 

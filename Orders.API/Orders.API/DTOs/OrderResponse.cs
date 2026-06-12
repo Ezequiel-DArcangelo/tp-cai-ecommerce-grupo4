@@ -2,11 +2,11 @@
 {
     public class OrderResponse
     {
-        public int Id { get; set; }
-        public int UsuarioId { get; set; }
-        public List<OrderItemDTO> Items { get; set; }
+        public string Id { get; set; } = string.Empty;
+        public string UsuarioId { get; set; } = string.Empty;
+        public List<OrderItemDTO> Items { get; set; } = new List<OrderItemDTO>();
         public decimal Total { get; set; }
-        public string Estado { get; set; } // Pendiente, Confirmada, Enviada, Entregada
-        public DateTime FechaCreacion { get; set; }
+        public string Estado { get; set; } = string.Empty;
+        public string FechaCreacion { get; set; } = string.Empty;
     }
 }

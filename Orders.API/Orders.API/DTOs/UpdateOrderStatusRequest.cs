@@ -2,6 +2,6 @@
 {
     public class UpdateOrderStatusRequest
     {
-        public string NuevoEstado { get; set; }
+        public string NuevoEstado { get; set; } = string.Empty;
     }
 }
