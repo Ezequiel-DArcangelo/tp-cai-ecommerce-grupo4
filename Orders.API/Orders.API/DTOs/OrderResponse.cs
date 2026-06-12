@@ -2,11 +2,11 @@
 {
     public class OrderResponse
     {
-        public string Id { get; set; } = string.Empty;
-        public string UsuarioId { get; set; } = string.Empty;
-        public List<OrderItemDTO> Items { get; set; } = new List<OrderItemDTO>();
+        public Guid Id { get; set; }
+        public Guid UsuarioId { get; set; }
+        public List<OrderItemDTO> Items { get; set; } = new();
         public decimal Total { get; set; }
         public string Estado { get; set; } = string.Empty;
-        public string FechaCreacion { get; set; } = string.Empty;
+        public DateTime FechaCreacion { get; set; }
     }
 }

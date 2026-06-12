@@ -14,8 +14,12 @@ namespace Orders.API.Data
         private SqliteConnection CreateConnection() =>
             new(_config.GetConnectionString("DefaultConnection") ?? "Data Source=orders.db");
 
-        // ── GET ALL ───────────────────────────────────────────────────────────
-        public async Task<IEnumerable<Order>> GetAllAsync(string? usuarioId = null)
+        /// <summary>
+        /// Obtiene todas las órdenes, con filtro opcional por usuario.
+        /// </summary>
+        /// <param name="usuarioId">Identificador del usuario (Guid) o null para traer todas.</param>
+        /// <returns>Lista de órdenes con sus ítems.</returns>
+        public async Task<IEnumerable<Order>> GetAllAsync(Guid? usuarioId = null)
         {
             using var conn = CreateConnection();
             var orders = await conn.QueryAsync<Order>("""
@@ -35,8 +39,12 @@ namespace Orders.API.Data
             return orders;
         }
 
-        // ── GET BY ID ─────────────────────────────────────────────────────────
-        public async Task<Order?> GetByIdAsync(string id)
+        /// <summary>
+        /// Obtiene una orden por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador de la orden (Guid).</param>
+        /// <returns>Orden encontrada o null si no existe.</returns>
+        public async Task<Order?> GetByIdAsync(Guid id)
         {
             using var conn = CreateConnection();
             var order = await conn.QuerySingleOrDefaultAsync<Order>("""
@@ -55,8 +63,12 @@ namespace Orders.API.Data
             return order;
         }
 
-        // ── GET ITEMS ─────────────────────────────────────────────────────────
-        public async Task<IEnumerable<OrderItemDTO>> GetItemsAsync(string orderId)
+        /// <summary>
+        /// Obtiene los ítems de una orden.
+        /// </summary>
+        /// <param name="orderId">Identificador de la orden (Guid).</param>
+        /// <returns>Lista de ítems de la orden.</returns>
+        public async Task<IEnumerable<OrderItemDTO>> GetItemsAsync(Guid orderId)
         {
             using var conn = CreateConnection();
             return await conn.QueryAsync<OrderItemDTO>("""
@@ -68,19 +80,24 @@ namespace Orders.API.Data
             """, new { OrderId = orderId });
         }
 
-        // ── CREATE ────────────────────────────────────────────────────────────
+        /// <summary>
+        /// Crea una nueva orden y sus ítems.
+        /// </summary>
+        /// <param name="order">Orden a crear.</param>
+        /// <returns>Orden creada con sus ítems.</returns>
         public async Task<Order> CreateAsync(Order order)
         {
             using var conn = CreateConnection();
             await conn.ExecuteAsync("""
-                INSERT INTO orders (id, usuario_id, total, estado)
-                VALUES (@Id, @UsuarioId, @Total, @Estado)
+                INSERT INTO orders (id, usuario_id, total, estado, created_at)
+                VALUES (@Id, @UsuarioId, @Total, @Estado, @FechaCreacion)
             """, new
             {
                 Id = order.Id,
                 UsuarioId = order.UsuarioId,
                 Total = order.Total,
-                Estado = order.Estado
+                Estado = order.Estado,
+                FechaCreacion = order.FechaCreacion
             });
 
             foreach (var item in order.Items)
@@ -100,8 +117,13 @@ namespace Orders.API.Data
             return (await GetByIdAsync(order.Id))!;
         }
 
-        // ── UPDATE STATUS ─────────────────────────────────────────────────────
-        public async Task<bool> UpdateStatusAsync(string id, string nuevoEstado)
+        /// <summary>
+        /// Actualiza el estado de una orden.
+        /// </summary>
+        /// <param name="id">Identificador de la orden (Guid).</param>
+        /// <param name="nuevoEstado">Nuevo estado a asignar.</param>
+        /// <returns>True si se actualizó, false si no existe.</returns>
+        public async Task<bool> UpdateStatusAsync(Guid id, string nuevoEstado)
         {
             using var conn = CreateConnection();
             var rows = await conn.ExecuteAsync("""
@@ -112,7 +134,11 @@ namespace Orders.API.Data
             return rows > 0;
         }
 
-        // ── CHECK PRODUCTO EN ORDENES ACTIVAS ─────────────────────────────────
+        /// <summary>
+        /// Verifica si un producto está presente en órdenes activas.
+        /// </summary>
+        /// <param name="productoId">Identificador del producto.</param>
+        /// <returns>True si el producto está en órdenes activas.</returns>
         public async Task<bool> ExisteProductoEnOrdenesActivasAsync(string productoId)
         {
             using var conn = CreateConnection();

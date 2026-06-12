@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using Serilog.Events;
 
-// ── Serilog ───────────────────────────────────────────────────────────────────
+// ── Serilog ────────────────────────────────────────────────────────────────
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -25,7 +25,7 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
-// ── Servicios ─────────────────────────────────────────────────────────────────
+// ── Servicios ──────────────────────────────────────────────────────────────
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>
     {
@@ -47,8 +47,19 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
+// HTTP Clients nombrados para Users y Products API
+builder.Services.AddHttpClient("UsersApi", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7206");
+});
+builder.Services.AddHttpClient("ProductsApi", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7196");
+});
+
 // HTTP Client para Users y Products API
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<UsersApiClient>();
+builder.Services.AddHttpClient<ProductsApiClient>();
 
 // Repositorio, inicializador y servicio
 builder.Services.AddSingleton<OrdersRepository>();
@@ -75,13 +86,13 @@ builder.Services.AddHealthChecksUI(setup =>
 
 var app = builder.Build();
 
-// ── Inicializar base de datos ─────────────────────────────────────────────────
+// ── Inicializar base de datos ──────────────────────────────────────────────
 using (var scope = app.Services.CreateScope())
     scope.ServiceProvider
         .GetRequiredService<OrdersDatabaseInitializer>()
         .Initialize();
 
-// ── Pipeline ──────────────────────────────────────────────────────────────────
+// ── Pipeline ───────────────────────────────────────────────────────────────
 app.UseExceptionHandler();
 
 app.UseSerilogRequestLogging(options =>
@@ -101,6 +112,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Health Check endpoints
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
