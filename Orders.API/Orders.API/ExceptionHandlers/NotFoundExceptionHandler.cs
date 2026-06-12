@@ -12,6 +12,8 @@ namespace Orders.API.ExceptionHandlers
         {
             if (exception is NotFoundException notFoundException)
             {
+                var correlationId = context.Items["X-Correlation-Id"]?.ToString() ?? string.Empty;
+
                 int statusCode = 404;
                 string title = "Not Found";
                 string detail = "El recurso solicitado no existe.";
@@ -27,7 +29,8 @@ namespace Orders.API.ExceptionHandlers
                     detail = detail,
                     instance = context.Request.Path.Value,
                     errorCode = notFoundException.ErrorCode,
-                    errorMessage = notFoundException.Message
+                    errorMessage = notFoundException.Message,
+                    correlationId = correlationId
                 };
 
                 await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);

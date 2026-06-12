@@ -15,6 +15,8 @@ namespace Orders.API.ExceptionHandlers
             string detail = "Error interno al procesar la orden.";
             string typeUrl = "https://tools.ietf.org/html/rfc7231#section-6.6.1";
 
+            var correlationId = context.Items["X-Correlation-Id"]?.ToString() ?? string.Empty;
+
             context.Response.StatusCode = statusCode;
 
             var problemDetails = new
@@ -25,7 +27,8 @@ namespace Orders.API.ExceptionHandlers
                 detail = detail,
                 instance = context.Request.Path.Value,
                 errorCode = "ORD-007",
-                errorMessage = exception.Message
+                errorMessage = exception.Message,
+                correlationId = correlationId
             };
 
             await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);

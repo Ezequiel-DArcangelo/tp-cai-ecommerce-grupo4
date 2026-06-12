@@ -11,12 +11,15 @@ namespace Orders.API.ExceptionHandlers
             CancellationToken cancellationToken)
         {
             if (exception is BusinessRuleException businessRuleException)
-            {
+            { 
+                var correlationId = context.Items["X-Correlation-Id"]?.ToString() ?? string.Empty;
+            
                 // Valores por defecto
                 int statusCode = 422;
                 string title = "Unprocessable Entity";
                 string detail = "No se puede procesar la solicitud.";
                 string typeUrl = "https://tools.ietf.org/html/rfc4918#section-11.2";
+
 
                 // Caso específico: transición inválida de estado (ORD-006)
                 if (businessRuleException.ErrorCode == "ORD-006")
@@ -46,7 +49,8 @@ namespace Orders.API.ExceptionHandlers
                     detail = detail,
                     instance = context.Request.Path.Value,
                     errorCode = businessRuleException.ErrorCode,
-                    errorMessage = businessRuleException.Message
+                    errorMessage = businessRuleException.Message,
+                    correlationId = correlationId
                 };
 
                 await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);

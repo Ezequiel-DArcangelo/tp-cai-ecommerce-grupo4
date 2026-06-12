@@ -12,6 +12,8 @@ namespace Orders.API.ExceptionHandlers
         {
             if (exception is ValidationException validationException)
             {
+                var correlationId = context.Items["X-Correlation-Id"]?.ToString() ?? string.Empty;
+
                 int statusCode = 400;
                 string title = "Bad Request";
                 string detail = "Los datos de la orden son inválidos.";
@@ -27,7 +29,8 @@ namespace Orders.API.ExceptionHandlers
                     detail = detail,
                     instance = context.Request.Path.Value,
                     errorCode = validationException.ErrorCode,
-                    errorMessage = validationException.Message
+                    errorMessage = validationException.Message,
+                    correlationId = correlationId
                 };
 
                 await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
