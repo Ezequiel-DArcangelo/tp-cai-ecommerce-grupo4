@@ -88,17 +88,29 @@ namespace Products.API.Services
             var product = await GetByIdAsync(id);
 
             var client = _httpClientFactory.CreateClient();
-            var respuesta = await client.GetFromJsonAsync<ResultadoOrden>($"https://localhost:7200/api/orders/check-product/{id}");
 
-            if (respuesta != null && respuesta.TieneOrdenesActivas)
+            var respuesta = await client.GetAsync($"https://localhost:56970/api/orders/check-product/{id}");
+
+            // Validamos que el microservicio haya respondido un 200 OK antes de intentar leer
+            if (respuesta.IsSuccessStatusCode)
             {
-                //Si el producto tiene órdenes asociadas, detiene la ejecución con un 400
-                throw new BusinessRuleException("PRD-004", "El producto tiene órdenes activas y no puede eliminarse.");
+                // 2. Leemos la respuesta usando el DTO correcto
+                var body = await respuesta.Content.ReadFromJsonAsync<TieneOrdenesDto>();
+
+                // 3. Chequeamos el booleano
+                if (body != null && body.TieneOrdenesActivas)
+                {
+                    throw new BusinessRuleException("PRD-004", "El producto tiene órdenes activas y no puede eliminarse.");
+                }
+            }
+            else
+            {
+                throw new Exception("Error al intentar comunicarse con el servicio de órdenes para validar el borrado.");
             }
 
             await _repository.DeleteAsync(id);
         }
-        public class ResultadoOrden
+        public class TieneOrdenesDto
         {
           public bool TieneOrdenesActivas { get; set; }
         }

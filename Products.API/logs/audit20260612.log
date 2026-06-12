@@ -1,0 +1,12 @@
+2026-06-12 11:44:06 | GET | /api/Products | 200 | CorrelationId: 
+2026-06-12 11:44:40 | DELETE | /api/Products/c3655533-c31a-4afa-95a8-53f35320090c | 500 | CorrelationId: 
+2026-06-12 11:52:48 | GET | /api/Products | 200 | CorrelationId: 
+2026-06-12 12:08:30 | PUT | /api/Products/c3655533-c31a-4afa-95a8-53f35320090c | 400 | CorrelationId: 
+2026-06-12 12:08:44 | PUT | /api/Products/c3655533-c31a-4afa-95a8-53f35320090c | 400 | CorrelationId: 
+2026-06-12 12:09:01 | PUT | /api/Products/c3655533-c31a-4afa-95a8-53f35320090c | 400 | CorrelationId: 
+2026-06-12 12:13:01 | PUT | /api/Products/c3655533-c31a-4afa-95a8-53f35320090 | 400 | CorrelationId: 
+2026-06-12 12:16:44 | PUT | /api/Products/c3655533-c31a-4afa-95a8-53f35320090c | 200 | CorrelationId: 
+2026-06-12 12:17:39 | PUT | /api/Products/97f29c65-e888-4983-8ef8-cc78f4a17c36 | 200 | CorrelationId: 
+2026-06-12 12:18:44 | PUT | /api/Products/fc016ba0-41cc-4b77-87b8-3a82b22896aa | 200 | CorrelationId: 
+2026-06-12 12:20:20 | PUT | /api/Products/c94e8901-8ac8-407f-9ed7-c2ad27f6c3ba | 200 | CorrelationId: 
+2026-06-12 12:20:28 | GET | /api/Products | 200 | CorrelationId: 
