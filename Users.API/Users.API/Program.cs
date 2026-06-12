@@ -16,7 +16,25 @@ builder.Services.AddControllers()
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Configuracion de Swagger con documentacion XML e informacion del API
+builder.Services.AddSwaggerGen(options =>
+{
+    // Informacion general del API que aparece arriba en Swagger UI
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Users API",
+        Version = "v1",
+        Description = "API de gestión de usuarios del e-commerce. Permite registrar usuarios, autenticarlos y consultarlos por ID."
+    });
+
+    // Leer el archivo XML generado al compilar para mostrar los comentarios en Swagger
+    string xmlFileName = System.AppDomain.CurrentDomain.FriendlyName + ".xml";
+    string xmlPath = System.IO.Path.Combine(System.AppContext.BaseDirectory, xmlFileName);
+    if (System.IO.File.Exists(xmlPath))
+    {
+        options.IncludeXmlComments(xmlPath);
+    }
+});
 builder.Services.AddSingleton<UsersRepository>();
 builder.Services.AddSingleton<UsersService>();
 
