@@ -9,42 +9,8 @@
             Gestión de órdenes de compra
             </summary>
         </member>
-        <member name="M:Orders.API.Controllers.OrdersController.GetOrders(System.String)">
-            <summary>Listar todas las órdenes con filtro opcional por usuario</summary>
-            <param name="usuarioId">ID del usuario para filtrar (opcional)</param>
-            <response code="200">Lista de órdenes</response>
-            <response code="500">ORD-007: Error interno</response>
-        </member>
-        <member name="M:Orders.API.Controllers.OrdersController.GetOrderById(System.String)">
-            <summary>Obtener detalle de una orden por ID</summary>
-            <param name="id">ID de la orden</param>
-            <response code="200">Orden encontrada</response>
-            <response code="404">ORD-001: Orden no encontrada</response>
-            <response code="500">ORD-007: Error interno</response>
-        </member>
-        <member name="M:Orders.API.Controllers.OrdersController.CreateOrder(Orders.API.DTOs.CreateOrderRequest)">
-            <summary>Crear una nueva orden</summary>
-            <param name="request">Datos de la orden</param>
-            <response code="201">Orden creada correctamente</response>
-            <response code="400">ORD-002: Datos de la orden inválidos</response>
-            <response code="404">ORD-003: Usuario no encontrado | ORD-004: Producto no encontrado</response>
-            <response code="422">ORD-005: Stock insuficiente</response>
-            <response code="500">ORD-007: Error interno</response>
-        </member>
-        <member name="M:Orders.API.Controllers.OrdersController.UpdateOrderStatus(System.String,Orders.API.DTOs.UpdateOrderStatusRequest)">
-            <summary>Actualizar el estado de una orden</summary>
-            <param name="id">ID de la orden</param>
-            <param name="request">Nuevo estado</param>
-            <response code="200">Estado actualizado correctamente</response>
-            <response code="404">ORD-001: Orden no encontrada</response>
-            <response code="409">ORD-006: Transición de estado inválida</response>
-            <response code="500">ORD-007: Error interno</response>
-        </member>
-        <member name="M:Orders.API.Controllers.OrdersController.CheckProductActiveOrders(System.String)">
-            <summary>Verificar si un producto tiene órdenes activas</summary>
-            <param name="id">ID del producto</param>
-            <response code="200">Resultado de la verificación</response>
-            <response code="500">ORD-007: Error interno</response>
+        <member name="M:Orders.API.Controllers.OrdersController.#ctor(Orders.API.Services.OrdersService)">
+            <summary>Constructor</summary>
         </member>
     </members>
 </doc>
