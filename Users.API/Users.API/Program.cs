@@ -3,6 +3,8 @@ using Users.API.ExceptionHandlers;
 using Users.API.Data;
 using Users.API.Repositories;
 using Dapper;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,11 @@ builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
+// Registrar los health checks. El check de SQLite se etiqueta como "ready"
+// para que solo se evalue en /health/ready.
+builder.Services.AddHealthChecks()
+    .AddCheck<SqliteHealthCheck>("sqlite", tags: new[] { "ready" });
+
 
 var app = builder.Build();
 
@@ -69,6 +76,44 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+// Endpoints de health checks con respuesta en formato JSON
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = EscribirRespuestaHealthCheck
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("ready"),
+    ResponseWriter = EscribirRespuestaHealthCheck
+});
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions
+{
+    Predicate = check => false,
+    ResponseWriter = EscribirRespuestaHealthCheck
+});
+
 app.MapControllers();
 
 app.Run();
+
+// Metodo que arma la respuesta JSON de los health checks
+static Task EscribirRespuestaHealthCheck(HttpContext context, HealthReport report)
+{
+    context.Response.ContentType = "application/json";
+
+    var resultado = new
+    {
+        status = report.Status.ToString(),
+        checks = report.Entries.Select(entry => new
+        {
+            name = entry.Key,
+            status = entry.Value.Status.ToString(),
+            description = entry.Value.Description
+        }),
+        totalDuration = report.TotalDuration.ToString()
+    };
+
+    return context.Response.WriteAsJsonAsync(resultado);
+}
