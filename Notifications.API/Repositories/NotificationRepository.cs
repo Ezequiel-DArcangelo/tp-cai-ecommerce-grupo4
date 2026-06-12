@@ -55,7 +55,7 @@ public class NotificationRepository
 
         string query = "SELECT * FROM Notifications WHERE UsuarioId = @UserId;";
 
-        return db.Query<Notification>(query, new { UserId = userId.ToString() }).ToList();
+        return db.Query<Notification>(query, new { UsuarioId = userId.ToString() }).ToList();
 
     }
 }

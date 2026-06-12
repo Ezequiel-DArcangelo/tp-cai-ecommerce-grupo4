@@ -10,7 +10,7 @@
 
         public string Tipo { get; set; } = string.Empty; 
 
-        public string Estado { get; set; } = "Pendiente"; 
+        public string Estado { get; set; } = "Enviada"; 
 
         public DateTime FechaEnvio { get; set; } = DateTime.UtcNow;
 

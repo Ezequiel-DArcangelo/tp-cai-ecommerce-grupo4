@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Primitives;
+using Serilog.Context;
 
 namespace Notifications.API
 {
@@ -14,16 +15,20 @@ namespace Notifications.API
 
         public async Task InvokeAsync(HttpContext context)
         {
-            // Si se envió un Correlation ID se usa y sino genera uno nuevo
-            if (!context.Request.Headers.TryGetValue(CorrelationIdHeaderKey, out StringValues correlationId))
+            // Intentamos leerlo del request si se envió
+            if (!context.Request.Headers.TryGetValue(CorrelationIdHeaderKey, out var correlationId))
             {
+                // sino geneeramos uno nuevo
                 correlationId = Guid.NewGuid().ToString();
             }
 
-             //Se agrega a la respuesta HTTP
-             context.Response.Headers.Append(CorrelationIdHeaderKey, correlationId);
+            // Lo guardamos en Items (parque lo lean los handlers)
+            context.Items["CorrelationId"] = correlationId.ToString();
 
-             using (Serilog.Context.LogContext.PushProperty("CorrelationId", correlationId.ToString()))
+            //Se agrega a la respuesta HTTP
+            context.Response.Headers.Append(CorrelationIdHeaderKey, correlationId.ToString());
+
+             using (LogContext.PushProperty("CorrelationId", correlationId.ToString()))
              {
                await _next(context);
              }
