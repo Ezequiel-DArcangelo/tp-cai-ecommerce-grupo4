@@ -4,13 +4,14 @@
         <name>Orders.API</name>
     </assembly>
     <members>
-        <member name="T:Orders.API.Controllers.OrdersController">
+        <member name="M:Orders.API.ExceptionHandlers.GenericExceptionHandler.TryHandleAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,System.Threading.CancellationToken)">
             <summary>
-            Gestión de órdenes de compra
+            Intenta manejar cualquier excepción no controlada devolviendo un JSON con detalles del error.
             </summary>
-        </member>
-        <member name="M:Orders.API.Controllers.OrdersController.#ctor(Orders.API.Services.OrdersService)">
-            <summary>Constructor</summary>
+            <param name="context">Contexto HTTP actual.</param>
+            <param name="exception">Excepción capturada.</param>
+            <param name="cancellationToken">Token de cancelación.</param>
+            <returns>True si la excepción fue manejada.</returns>
         </member>
     </members>
 </doc>

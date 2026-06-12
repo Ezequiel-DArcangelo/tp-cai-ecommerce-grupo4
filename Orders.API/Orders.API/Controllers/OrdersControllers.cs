@@ -4,9 +4,6 @@ using Orders.API.Services;
 
 namespace Orders.API.Controllers
 {
-    /// <summary>
-    /// Gestión de órdenes de compra
-    /// </summary>
     [ApiController]
     [Route("api/orders")]
     [Tags("Orders")]
@@ -14,13 +11,39 @@ namespace Orders.API.Controllers
     {
         private readonly OrdersService _ordersService;
 
-        /// <summary>Constructor</summary>
         public OrdersController(OrdersService ordersService)
         {
             _ordersService = ordersService;
         }
-    } }
-        /// <summary>Listar todas las órdenes con filtro opcional por usuario</summary>
-        /// <param name="usuarioId">ID del usuario para filtrar (opcional)</param>
-        /// <response code="200">Lista de órdenes</response>
-        /// <response code="500">ORD-007: Error intern
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrders([FromQuery] string? usuarioId)
+        {
+            var response = await _ordersService.GetOrders(usuarioId);
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrderById(string id)
+        {
+            var response = await _ordersService.GetOrderById(id);
+            if (response == null)
+                return NotFound();
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+        {
+            var response = await _ordersService.CreateOrder(request);
+            return StatusCode(201, response);
+        }
+
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(string id, [FromBody] UpdateOrderStatusRequest request)
+        {
+            var response = await _ordersService.UpdateOrderStatus(id, request);
+            return Ok(response);
+        }
+    }
+}

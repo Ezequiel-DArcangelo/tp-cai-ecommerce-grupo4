@@ -9,11 +9,14 @@
     "Parameters": [
       {
         "Name": "usuarioId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Tags": [
+      "Orders"
+    ]
   },
   {
     "ContainingType": "Orders.API.Controllers.OrdersController",
@@ -29,7 +32,10 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Tags": [
+      "Orders"
+    ]
   },
   {
     "ContainingType": "Orders.API.Controllers.OrdersController",
@@ -41,11 +47,14 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Tags": [
+      "Orders"
+    ]
   },
   {
     "ContainingType": "Orders.API.Controllers.OrdersController",
@@ -57,7 +66,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       },
       {
@@ -66,6 +75,9 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Tags": [
+      "Orders"
+    ]
   }
 ]

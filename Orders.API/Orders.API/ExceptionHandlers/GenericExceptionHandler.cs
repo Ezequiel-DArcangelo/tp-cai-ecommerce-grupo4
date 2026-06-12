@@ -2,9 +2,22 @@
 using Orders.API.Exceptions;
 
 namespace Orders.API.ExceptionHandlers
+
+/// <summary>
+/// Manejador genérico de excepciones para errores internos en Orders.API.
+/// Devuelve un JSON con los detalles del error y el código corporativo ORD-007.
+/// </summary>
 {
     public class GenericExceptionHandler : IExceptionHandler
+
     {
+        /// <summary>
+        /// Intenta manejar cualquier excepción no controlada devolviendo un JSON con detalles del error.
+        /// </summary>
+        /// <param name="context">Contexto HTTP actual.</param>
+        /// <param name="exception">Excepción capturada.</param>
+        /// <param name="cancellationToken">Token de cancelación.</param>
+        /// <returns>True si la excepción fue manejada.</returns>
         public async ValueTask<bool> TryHandleAsync(
             HttpContext context,
             Exception exception,

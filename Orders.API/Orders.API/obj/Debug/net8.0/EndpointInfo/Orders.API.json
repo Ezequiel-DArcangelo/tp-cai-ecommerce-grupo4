@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Orders.API",
-    "version": "1.0"
+    "title": "Orders API",
+    "description": "API para gestión de órdenes de compra",
+    "version": "v1"
   },
   "paths": {
     "/api/orders": {
@@ -15,8 +16,7 @@
             "name": "usuarioId",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -67,8 +67,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -90,8 +89,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -128,8 +126,8 @@
         "type": "object",
         "properties": {
           "usuarioId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "items": {
             "type": "array",
@@ -145,12 +143,16 @@
         "type": "object",
         "properties": {
           "productoId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "cantidad": {
             "type": "integer",
             "format": "int32"
+          },
+          "precioUnitario": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
