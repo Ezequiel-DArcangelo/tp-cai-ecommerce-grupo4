@@ -14,24 +14,12 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.AspNetCore.Hosting.Diagnostics", LogEventLevel.Information)
     .Enrich.FromLogContext()
-    .WriteTo.Logger(lc => lc
-        .Filter.ByIncludingOnly(le => le.Level >= LogEventLevel.Error)
-        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"))
-    .WriteTo.Logger(lc => lc
-        .Filter.ByIncludingOnly(le =>
-        {
-            var esSerilogMiddleware = Serilog.Filters.Matching
-                .FromSource("Serilog.AspNetCore.RequestLoggingMiddleware")(le);
-            if (!esSerilogMiddleware) return false;
-            if (le.Properties.TryGetValue("RequestPath", out var p) &&
-                p is Serilog.Events.ScalarValue s && s.Value is string path)
-                return !path.Contains("/health") && !path.Contains("/swagger");
-            return true;
-        })
-        .WriteTo.File(
-            path: "logs/audit.log",
-            outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} | {RequestMethod} | {RequestPath} | {StatusCode}{NewLine}",
-            rollingInterval: RollingInterval.Day))
+    .Enrich.WithProperty("Servicio", "Cart.API")
+    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{Servicio}] [{CorrelationId}] {Message:lj}{NewLine}{Exception}")
+    .WriteTo.File(
+        path: "logs/cart-.log",
+        formatter: new Serilog.Formatting.Json.JsonFormatter(),
+        rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,7 +33,20 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Cart API",
+        Version = "v1",
+        Description = "API para gestión del carrito de compras"
+    });
+
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+});
 
 
 // HTTP Client para Products API
