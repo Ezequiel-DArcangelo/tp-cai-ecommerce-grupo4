@@ -81,7 +81,11 @@ namespace Products.API.Controllers
             // El servicio se encarga de actualizar el producto y lanza una excepción si no lo encuentra
             await _productService.UpdateAsync(id, product);
 
-            return NoContent(); // Código 204: la actualización fue exitosa pero no se devuelve contenido en la respuesta
+            //Buscamos el producto recién actualizado en la base para que nos traiga su ID y Fecha originales
+            var productoActualizado = await _productService.GetByIdAsync(id);
+
+            //Devolvemos el HTTP 200 OK con el JSON del producto completo
+            return Ok(productoActualizado);
         }
 
         [HttpDelete("{id}")]// 5. DELETE api/products/{id} (elimina un producto por su ID)
