@@ -3,6 +3,38 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\orders.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:orders.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\middleware\\auditmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:middleware\\auditmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\middleware\\correlationidmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:middleware\\correlationidmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\healthcheck\\sqlitehealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:healthcheck\\sqlitehealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\healthcheck\\apistatuscheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:healthcheck\\apistatuscheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\dtos\\updateorderstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:dtos\\updateorderstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -37,10 +69,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\data\\ordersdatabaseinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:data\\ordersdatabaseinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F4EF4A57-AF1E-E2B3-7AA1-20A926CE7A98}|Orders.API.csproj|c:\\users\\administrator\\documents\\github\\tp-cai-ecommerce-grupo4\\orders.api\\orders.api\\exceptions\\businessruleexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,6 +111,110 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-12T04:45:39.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-12T04:40:17.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuditMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Middleware\\AuditMiddleware.cs",
+              "RelativeDocumentMoniker": "Middleware\\AuditMiddleware.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Middleware\\AuditMiddleware.cs",
+              "RelativeToolTip": "Middleware\\AuditMiddleware.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAAEEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T04:39:41.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CorrelationIdMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Middleware\\CorrelationIdMiddleware.cs",
+              "RelativeDocumentMoniker": "Middleware\\CorrelationIdMiddleware.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Middleware\\CorrelationIdMiddleware.cs",
+              "RelativeToolTip": "Middleware\\CorrelationIdMiddleware.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAAB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T04:39:09.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SqliteHealthCheck.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\HealthCheck\\SqliteHealthCheck.cs",
+              "RelativeDocumentMoniker": "HealthCheck\\SqliteHealthCheck.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\HealthCheck\\SqliteHealthCheck.cs",
+              "RelativeToolTip": "HealthCheck\\SqliteHealthCheck.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T04:38:15.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Orders.API",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Orders.API.csproj",
+              "RelativeDocumentMoniker": "Orders.API.csproj",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Orders.API.csproj",
+              "RelativeToolTip": "Orders.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-06-12T04:35:13.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAAAFQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-25T22:09:40.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApiStatusCheck.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\HealthCheck\\ApiStatusCheck.cs",
+              "RelativeDocumentMoniker": "HealthCheck\\ApiStatusCheck.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\HealthCheck\\ApiStatusCheck.cs",
+              "RelativeToolTip": "HealthCheck\\ApiStatusCheck.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T04:37:33.628Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "UpdateOrderStatusRequest.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\UpdateOrderStatusRequest.cs",
               "RelativeDocumentMoniker": "DTOs\\UpdateOrderStatusRequest.cs",
@@ -95,7 +227,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "OrderResponse.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\OrderResponse.cs",
               "RelativeDocumentMoniker": "DTOs\\OrderResponse.cs",
@@ -103,12 +235,11 @@
               "RelativeToolTip": "DTOs\\OrderResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T04:19:55.214Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-12T04:19:55.214Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "OrdersService.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Services\\OrdersService.cs",
               "RelativeDocumentMoniker": "Services\\OrdersService.cs",
@@ -116,12 +247,11 @@
               "RelativeToolTip": "Services\\OrdersService.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAUwCwAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T04:18:00.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-12T04:18:00.512Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 14,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Models\\Order.cs",
               "RelativeDocumentMoniker": "Models\\Order.cs",
@@ -129,12 +259,11 @@
               "RelativeToolTip": "Models\\Order.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T02:02:18.38Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T02:02:18.38Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "OrderItemDTO.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\OrderItemDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\OrderItemDTO.cs",
@@ -142,12 +271,11 @@
               "RelativeToolTip": "DTOs\\OrderItemDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:52:32.124Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T22:52:32.124Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "CreateOrderRequest.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\DTOs\\CreateOrderRequest.cs",
               "RelativeDocumentMoniker": "DTOs\\CreateOrderRequest.cs",
@@ -155,12 +283,11 @@
               "RelativeToolTip": "DTOs\\CreateOrderRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:48:16.6Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T22:48:16.6Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "OrdersControllers.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Controllers\\OrdersControllers.cs",
               "RelativeDocumentMoniker": "Controllers\\OrdersControllers.cs",
@@ -168,12 +295,11 @@
               "RelativeToolTip": "Controllers\\OrdersControllers.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:17:36.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T22:17:36.402Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 15,
               "Title": "OrdersRepository..cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Data\\OrdersRepository..cs",
               "RelativeDocumentMoniker": "Data\\OrdersRepository..cs",
@@ -181,12 +307,11 @@
               "RelativeToolTip": "Data\\OrdersRepository..cs",
               "ViewState": "AgIAAFsAAAAAAAAAAADwv4AAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T04:14:43.879Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-12T04:14:43.879Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 16,
               "Title": "OrdersDatabaseInitializer.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Data\\OrdersDatabaseInitializer.cs",
               "RelativeDocumentMoniker": "Data\\OrdersDatabaseInitializer.cs",
@@ -194,25 +319,11 @@
               "RelativeToolTip": "Data\\OrdersDatabaseInitializer.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAwwC8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T04:13:04.7Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-12T04:13:04.7Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC0AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:09:40.937Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "BusinessRuleException.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Exceptions\\BusinessRuleException.cs",
               "RelativeDocumentMoniker": "Exceptions\\BusinessRuleException.cs",
@@ -220,12 +331,11 @@
               "RelativeToolTip": "Exceptions\\BusinessRuleException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:33:11.06Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T22:33:11.06Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 20,
               "Title": "NotFoundExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\NotFoundExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\NotFoundExceptionHandler.cs",
@@ -233,12 +343,11 @@
               "RelativeToolTip": "ExceptionHandlers\\NotFoundExceptionHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T00:36:29.513Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T00:36:29.513Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
               "Title": "GenericExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\GenericExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\GenericExceptionHandler.cs",
@@ -246,12 +355,11 @@
               "RelativeToolTip": "ExceptionHandlers\\GenericExceptionHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T00:39:11.785Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T00:39:11.785Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 18,
               "Title": "BusinessRuleExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
@@ -259,12 +367,11 @@
               "RelativeToolTip": "ExceptionHandlers\\BusinessRuleExceptionHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T00:20:28.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T00:20:28.528Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 21,
               "Title": "ValidationExceptionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\ExceptionHandlers\\ValidationExceptionHandler.cs",
               "RelativeDocumentMoniker": "ExceptionHandlers\\ValidationExceptionHandler.cs",
@@ -272,12 +379,11 @@
               "RelativeToolTip": "ExceptionHandlers\\ValidationExceptionHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T00:37:16.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T00:37:16.153Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 22,
               "Title": "ValidationException.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Exceptions\\ValidationException.cs",
               "RelativeDocumentMoniker": "Exceptions\\ValidationException.cs",
@@ -285,12 +391,11 @@
               "RelativeToolTip": "Exceptions\\ValidationException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAA+wAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:34:01.475Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T22:34:01.475Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 23,
               "Title": "NotFoundException.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\GitHub\\tp-cai-ecommerce-grupo4\\Orders.API\\Orders.API\\Exceptions\\NotFoundException.cs",
               "RelativeDocumentMoniker": "Exceptions\\NotFoundException.cs",
@@ -298,8 +403,7 @@
               "RelativeToolTip": "Exceptions\\NotFoundException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T22:34:34.024Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T22:34:34.024Z"
             }
           ]
         }
