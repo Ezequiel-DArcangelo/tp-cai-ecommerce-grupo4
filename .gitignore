@@ -1,0 +1,19 @@
+# Archivos de compilación de .NET
+**/bin/
+**/obj/
+
+# Archivos de Visual Studio
+**/.vs/
+*.user
+*.suo
+
+# Bases de datos SQLite (datos locales, no se suben)
+**/*.db
+**/*.db-journal
+
+# Carpetas de logs de Serilog
+**/logs/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
