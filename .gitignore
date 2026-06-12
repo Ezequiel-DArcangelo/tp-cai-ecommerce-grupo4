@@ -44,3 +44,6 @@ logs/
 # Archivos de base de datos SQLite
 *.db
 *.db-journal
+
+# Carpeta de logs de Serilog
+logs/

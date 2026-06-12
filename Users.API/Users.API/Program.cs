@@ -5,8 +5,23 @@ using Users.API.Repositories;
 using Dapper;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Serilog;
+using Users.API.Middlewares;
+
+// Configurar Serilog: dos sinks (consola legible + archivo JSON con rotacion diaria)
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(
+        path: "logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {Message} {Properties:j}{NewLine}{Exception}")
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Decirle a ASP.NET que use Serilog en lugar del logger por defecto
+builder.Host.UseSerilog();
 
 // Desactivar la validacion automatica de Data Annotations.
 // Las validaciones las maneja UsersService y devuelven ValidationException (USR-002).
@@ -61,6 +76,13 @@ SqlMapper.AddTypeHandler(new GuidTypeHandler());
 // Inicializar la base de datos (crea el archivo .db y la tabla Users si no existen)
 string connectionString = builder.Configuration.GetConnectionString("UsersDb");
 DatabaseInitializer.Initialize(connectionString);
+
+// Asignar Correlation ID a cada request (debe ir antes que UseExceptionHandler
+// para que los logs de errores incluyan el ID).
+app.UseMiddleware<CorrelationIdMiddleware>();
+
+// Loggear cada request HTTP con metodo, ruta, status y duracion
+app.UseSerilogRequestLogging();
 
 // Activar el manejo global de excepciones (usa los handlers registrados arriba)
 app.UseExceptionHandler();
