@@ -17,7 +17,7 @@ namespace Orders.API.Services
         {
             try
             {
-                var client = _httpClientFactory.CreateClient();
+                var client = _httpClientFactory.CreateClient("ProductsApi"); 
                 var respuesta = await client.GetAsync($"/api/products/{productoId}");
 
                 if (respuesta.StatusCode == System.Net.HttpStatusCode.NotFound)

@@ -7,6 +7,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using Serilog.Events;
+using Dapper;
 
 // ── Serilog ────────────────────────────────────────────────────────────────
 Log.Logger = new LoggerConfiguration()
@@ -57,14 +58,12 @@ builder.Services.AddHttpClient("ProductsApi", client =>
     client.BaseAddress = new Uri("https://localhost:7196");
 });
 
-// HTTP Client para Users y Products API
-builder.Services.AddHttpClient<UsersApiClient>();
-builder.Services.AddHttpClient<ProductsApiClient>();
-
 // Repositorio, inicializador y servicio
 builder.Services.AddSingleton<OrdersRepository>();
 builder.Services.AddSingleton<OrdersDatabaseInitializer>();
 builder.Services.AddScoped<OrdersService>();
+builder.Services.AddScoped<UsersApiClient>();
+builder.Services.AddScoped<ProductsApiClient>();
 
 // Exception handlers
 builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
@@ -83,6 +82,9 @@ builder.Services.AddHealthChecksUI(setup =>
     setup.SetEvaluationTimeInSeconds(600);
     setup.AddHealthCheckEndpoint("Orders.API", "/health");
 }).AddInMemoryStorage();
+
+// Registrar el TypeHandler para convertir entre Guid (C#) y string (SQLite)
+SqlMapper.AddTypeHandler(new GuidTypeHandler());
 
 var app = builder.Build();
 
